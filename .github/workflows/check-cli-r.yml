@@ -38,12 +38,12 @@ jobs:
 
       - name: Install R dependencies
         run: |
-          Rscript -e "install.packages('remotes')"
+          install.packages("remotes")
         shell: Rscript {0}
 
       - name: Install the 'seguid' R package
         run: |
-          Rscript -e "remotes::install_github('seguid/seguid-r', dependencies = TRUE)"
+          remotes::install_github("seguid/seguid-r", dependencies = TRUE)
         shell: Rscript {0}
 
       - name: Session info
