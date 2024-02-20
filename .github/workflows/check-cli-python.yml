@@ -27,13 +27,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
 
-    - name: Install this Python package
+    - name: Install the 'seguid' Python package
       run: |
-        pip install .[pydivsufsort]
+        pip install git+https://github.com/seguid/seguid-python.git
+        pip install pydivsufsort
 
     - name: Session information
       run: |
         python --version
+        python -m pip list
 
     - name: Check CLI
       if: runner.os != 'Windows'
