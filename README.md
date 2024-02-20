@@ -52,3 +52,16 @@ or short:
 ```sh
 $ make check-cli/seguid-r
 ```
+
+
+
+## Requirements
+
+The CLI checks are implemented in Bash and Bats (Bash Automated
+Testing System):
+
+* Bash
+* [bats-core]
+
+[bats-core]: https://bats-core.readthedocs.io/en/stable/
+
