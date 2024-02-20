@@ -1,8 +1,8 @@
 #!/usr/bin/env bats
 
 setup() {
-    load "${BATS_SUPPORT_HOME:?}/load.bash"
-    load "${BATS_ASSERT_HOME:?}/load.bash"
+    load "test_helper/bats-support/load"
+    load "test_helper/bats-assert/load"
 
     read -r -a cli_call <<< "${CLI_CALL:?}"
     echo "cli_call: [n=${#cli_call[@]}] ${cli_call[*]}"
