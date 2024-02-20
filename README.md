@@ -1,3 +1,7 @@
+[![Python CLI checks](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-python.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-python.yml)
+[![R CLI checks](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-r.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-r.yml)
+
+
 # seguid-tests: Test Suite for SEGUID Implementations
 
 This repository provides as set of unit tests for validating current
