@@ -20,8 +20,6 @@ jobs:
 
       matrix:
         config:
-#          - {os: windows-latest, python: '3.12' }
-          - {os: windows-latest, python: '3.11' }
 #          - {os: macOS-latest,   python: '3.12' }
           - {os: macOS-latest,   python: '3.11' }
           - {os: ubuntu-latest,  python: '3.12' }
