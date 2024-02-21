@@ -1,4 +1,11 @@
-on: [push, pull_request]
+on:
+  push:
+  
+  pull_request:
+  
+  schedule:
+    ## Run every 3 hours
+    - cron:  '0 */3 * * *'
 
 name: "R CLI check"
 
