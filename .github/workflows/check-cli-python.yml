@@ -11,16 +11,33 @@ jobs:
 
     timeout-minutes: 10
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.python }})
 
     strategy:
       fail-fast: false
+
+      matrix:
+        config:
+#          - {os: windows-latest, python: '3.12' }
+          - {os: windows-latest, python: '3.11' }
+#          - {os: macOS-latest,   python: '3.12' }
+          - {os: macOS-latest,   python: '3.11' }
+          - {os: ubuntu-latest,  python: '3.12' }
+          - {os: ubuntu-latest,  python: '3.11' }
+          - {os: ubuntu-latest,  python: '3.10' }
+          - {os: ubuntu-latest,  python: '3.9' }
+          - {os: ubuntu-latest,  python: '3.8' }
+          - {os: ubuntu-20.04,   python: '3.6' }
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v4
+      with:
+        python-version: "${{ matrix.config.python }}"
 
     - name: Install Python dependencies
       run: |
