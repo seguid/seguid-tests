@@ -73,7 +73,7 @@ setup() {
 @test "<CLI call> --type=ldseguid <<< \$'AACGT\\nTTGCA'" {
     run "${cli_call[@]}" --type=ldseguid <<< $'AACGT\nTTGCA'
     assert_success
-    assert_output "ldseguid=tYeHZYwxQGDHTqGDcrebERag0AU"
+    assert_output "ldseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
 }
 
 @test "<CLI call> --type=ldseguid <<< \$'ACGTT\\nTGCAA' (strand symmetry)" {
@@ -86,25 +86,25 @@ setup() {
 @test "<CLI call> --type=ldseguid <<< \$'-CGT\\nTGCA'" {
     run "${cli_call[@]}" --type=ldseguid <<< $'-CGT\nTGCA'
     assert_success
-    assert_output "ldseguid=ONPHQCrPDPDbypL85mg8vXNQGPw"
+    assert_output "ldseguid=PVID4ZDkJEzFu2w2RLBCMQdZgvE"
 }
 
 @test "<CLI call> --type=ldseguid <<< \$'-CGT\nTGC-'" {
     run "${cli_call[@]}" --type=ldseguid <<< $'-CGT\nTGC-'
     assert_success
-    assert_output "ldseguid=a_o4Ga8vQrhlvI_zkjUg0uu6obA"
+    assert_output "ldseguid=s_nCUnQCNz7NjQQTOBmoqIvXexA"
 }
 
 @test "<CLI call> --type=ldseguid <<< \$'--TTACA\nCTAATG-'" {
     run "${cli_call[@]}" --type=ldseguid <<< $'--TTACA\nCTAATG-'
     assert_success
-    assert_output "ldseguid=V5jUOgj3BIT71mTOAp4161kx3HA"
+    assert_output "ldseguid=4RNiS6tZ_3dnHmqD_15_83vEqKQ"
 }
 
 @test "<CLI call> --type=ldseguid <<< \$'A\nT' (single-symbol input)" {
     run "${cli_call[@]}" --type=ldseguid <<< $'A\nT'
     assert_success
-    assert_output "ldseguid=S4AfmFCoHYVrWNQ_d7-lVVF2t20"
+    assert_output "ldseguid=ydezQsYTZgUCcb3-adxMaq_Xf8g"
 }
 
 
@@ -144,13 +144,13 @@ setup() {
 @test "<CLI call> --type=cdseguid <<< \$'AACGT\\nTTGCA'" {
     run "${cli_call[@]}" --type=cdseguid <<< $'AACGT\nTTGCA'
     assert_success
-    assert_output "cdseguid=tYeHZYwxQGDHTqGDcrebERag0AU"
+    assert_output "cdseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
 }
 
 @test "<CLI call> --type=cdseguid <<< \$'CGTAA\\nGCATT' (rotation invariant)" {
     run "${cli_call[@]}" --type=cdseguid <<< $'CGTAA\nGCATT'
     assert_success
-    assert_output "cdseguid=tYeHZYwxQGDHTqGDcrebERag0AU"
+    assert_output "cdseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
 }
 
 @test "<CLI call> --type=cdseguid <<< \$'GTAAC\\nCATTG' (rotation invariant)" {
@@ -170,7 +170,7 @@ setup() {
 @test "<CLI call> --type=cdseguid <<< \$'A\nT' (single-symbol input)" {
     run "${cli_call[@]}" --type=cdseguid <<< $'A\nT'
     assert_success
-    assert_output "cdseguid=S4AfmFCoHYVrWNQ_d7-lVVF2t20"
+    assert_output "cdseguid=ydezQsYTZgUCcb3-adxMaq_Xf8g"
 }
 
 
@@ -236,13 +236,13 @@ setup() {
 @test "<CLI call> --type=ldseguid --alphabet='{RNA}' <<< \$'AACGU\\nUUdTGCA'" {
     run "${cli_call[@]}" --type=ldseguid --alphabet='{RNA}' <<< $'AACGU\nUUGCA'
     assert_success
-    assert_output "ldseguid=r61AxqwrG01x8RpNluuRlfoL9VY"
+    assert_output "ldseguid=x5iCPrq2tytNXOWgZroz1u6AN2Y"
 }
 
 @test "<CLI call> --type=cdseguid --alphabet='{RNA}' <<< \$'AACGU\\nUUGCA'" {
     run "${cli_call[@]}" --type=cdseguid --alphabet='{RNA}' <<< $'AACGU\nUUGCA'
     assert_success
-    assert_output "cdseguid=r61AxqwrG01x8RpNluuRlfoL9VY"
+    assert_output "cdseguid=x5iCPrq2tytNXOWgZroz1u6AN2Y"
 }
 
 
@@ -301,14 +301,14 @@ setup() {
 @test "<CLI call> --type=ldseguid --alphabet='{DNA},m1,1m,h2,2h,f3,3f,c4,4c' <<< \$'AmT2C\nT1AhG'" {
     run "${cli_call[@]}" --type=ldseguid --alphabet="{DNA},m1,1m,h2,2h,f3,3f,c4,4c" <<< $'AmT2C\nT1AhG'
     assert_success
-    assert_output "ldseguid=rsPDjP4SWr3-ploCeXTdTA80u0Y"
+    assert_output "ldseguid=bFZedILTms4ORUi3SSMfU0FUl7Q"
 }
 
 # Ambigous expanded epigenetic alphabet per Viner et al. (2024)
 @test "<CLI call> --type=ldseguid --alphabet='{DNA},m1,1m,h2,2h,f3,3f,c4,4c,w6,6w,x7,7x,y8,8y,z9,9z' <<< \$'AmT2C\nT1AhG'" {
     run "${cli_call[@]}" --type=ldseguid --alphabet="{DNA},m1,1m,h2,2h,f3,3f,c4,4c,w6,6w,x7,7x,y8,8y,z9,9z" <<< $'AAAhyAmA\nTTT28T1T'
     assert_success
-    assert_output "ldseguid=ARKoPbYshXt9atSMOfbwMdcviXA"
+    assert_output "ldseguid=7-4HH4Evl9RhN0OzTK18QPoqjWo"
 }
 
 # Non-bijective complementary alphabets
@@ -322,7 +322,7 @@ setup() {
 @test "<CLI call> --type=ldseguid --alphabet='{DNA},AU,UA' <<< \$'AAT\nTUA'" {
     run "${cli_call[@]}" --type=ldseguid --alphabet='{DNA},AU,UA' <<< $'AAT\nTUA'
     assert_success
-    assert_output "ldseguid=9zPojNQ67iJaump8FpG70cjLGoQ"
+    assert_output "ldseguid=fHXyliATc43ySIxHY2Zjlepnupo"
 }
 
 
