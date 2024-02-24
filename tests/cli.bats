@@ -78,6 +78,12 @@ setup() {
     assert_output "ldseguid=tYeHZYwxQGDHTqGDcrebERag0AU"
 }
 
+@test "<CLI call> --type=ldseguid <<< \$'TTGCA\\nAACGT' (strand symmetry)" {
+    run "${cli_call[@]}" --type=cdseguid <<< $'TTGCA\nAACGT'
+    assert_success
+    assert_output "cdseguid=tYeHZYwxQGDHTqGDcrebERag0AU"
+}
+
 @test "<CLI call> --type=cdseguid <<< \$'AACGT\\nTTGCA'" {
     run "${cli_call[@]}" --type=cdseguid <<< $'AACGT\nTTGCA'
     assert_success
