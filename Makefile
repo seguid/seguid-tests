@@ -15,10 +15,10 @@ check-cli: assert-CLI_CALL assert-bats tests/test_helper/bats
 	bats *.bats
 
 check-cli/seguid-python:
-	make check-cli CLI_CALL="python -m seguid" 
+	$(MAKE) check-cli CLI_CALL="python -m seguid" 
 
 check-cli/seguid-r:
-	make check-cli CLI_CALL="Rscript -e seguid::seguid --args"
+	$(MAKE) check-cli CLI_CALL="Rscript -e seguid::seguid --args"
 
 tests/test_helper/bats: tests/test_helper/bats-support tests/test_helper/bats-assert
 
