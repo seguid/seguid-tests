@@ -12,6 +12,10 @@ setup() {
 ## --------------------------------------------------------
 ## Help and version
 ## --------------------------------------------------------
+@test "Version tested" {
+    >&3 "${cli_call[@]}" --version
+}
+
 @test "<CLI call> --version" {
     run "${cli_call[@]}" --version
     assert_success
