@@ -12,8 +12,10 @@ setup() {
 ## --------------------------------------------------------
 ## Help and version
 ## --------------------------------------------------------
-@test "Version tested" {
-    >&3 "${cli_call[@]}" --version
+@test "Session information" {
+    version=$("${cli_call[@]}" --version)
+    >&3 echo "CLI call: [n=${#cli_call[@]}] ${cli_call[*]}"
+    >&3 echo "Version: ${version}"
 }
 
 @test "<CLI call> --version" {
