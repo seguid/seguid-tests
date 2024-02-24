@@ -78,10 +78,11 @@ setup() {
     assert_output "ldseguid=tYeHZYwxQGDHTqGDcrebERag0AU"
 }
 
-@test "<CLI call> --type=ldseguid <<< \$'TTGCA\\nAACGT' (strand symmetry)" {
-    run "${cli_call[@]}" --type=cdseguid <<< $'TTGCA\nAACGT'
+@test "<CLI call> --type=ldseguid <<< \$'ACGTT\\nTGCAA' (strand symmetry)" {
+    truth=$("${cli_call[@]}" --type=ldseguid <<< $'AACGT\nTTGCA')
+    run "${cli_call[@]}" --type=ldseguid <<< $'ACGTT\nTGCAA'
     assert_success
-    assert_output "cdseguid=tYeHZYwxQGDHTqGDcrebERag0AU"
+    assert_output "${truth}"
 }
 
 @test "<CLI call> --type=cdseguid <<< \$'AACGT\\nTTGCA'" {
@@ -97,15 +98,17 @@ setup() {
 }
 
 @test "<CLI call> --type=cdseguid <<< \$'GTAAC\\nCATTG' (rotation invariant)" {
+    truth=$("${cli_call[@]}" --type=cdseguid <<< $'CGTAA\nGCATT')
     run "${cli_call[@]}" --type=cdseguid <<< $'GTAAC\nCATTG'
     assert_success
-    assert_output "cdseguid=tYeHZYwxQGDHTqGDcrebERag0AU"
+    assert_output "${truth}"
 }
 
 @test "<CLI call> --type=cdseguid <<< \$'GTTAC\\nCAATG' (strand symmetry)" {
+    truth=$("${cli_call[@]}" --type=cdseguid <<< $'CGTAA\nGCATT')
     run "${cli_call[@]}" --type=cdseguid <<< $'GTTAC\nCAATG'
     assert_success
-    assert_output "cdseguid=tYeHZYwxQGDHTqGDcrebERag0AU"
+    assert_output "${truth}"
 }
 
 @test "<CLI call> --type=ldseguid <<< \$'-CGT\\nTGCA'" {
