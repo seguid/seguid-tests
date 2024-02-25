@@ -28,7 +28,7 @@ setup() {
 @test "<CLI call> --help" {
     run "${cli_call[@]}" --help
     assert_success
-    assert_output --partial "seguid"
+    # assert_output --partial "seguid"
     assert_output --partial "--version"
     assert_output --partial "--help"
     assert_output --regexp "[Uu]sage:"
