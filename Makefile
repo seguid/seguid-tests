@@ -12,7 +12,10 @@ assert-CLI_CALL:
 	[[ -n "${CLI_CALL}" ]] || { >&2 echo "ERROR: CLI_CALL is not specified"; exit 1; }
 
 assert-bats:
-	cd tests && command -v "${BATS}" || { >&2 echo "ERROR: bats is not installed, run `git submodule init` and `git submodule update`"; exit 1; }
+	git submodule init
+	git submodule update
+	cd tests && command -v "${BATS}" || { >&2 echo "ERROR: bats is not installed"; exit 1; }
+
 
 check-cli/seguid-python:
 	$(MAKE) check-cli CLI_CALL="python -m seguid" 
