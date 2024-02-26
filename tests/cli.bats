@@ -76,20 +76,20 @@ setup() {
 ## --------------------------------------------------------
 ## ldsseguid()
 ## --------------------------------------------------------
-@test "<CLI call> --type=ldseguid <<< \$'AACGT\\nTTGCA'" {
+@test "<CLI call> --type=ldseguid <<< \$'AACGT\nTTGCA'" {
     run "${cli_call[@]}" --type=ldseguid <<< $'AACGT\nTTGCA'
     assert_success
     assert_output "ldseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
 }
 
-@test "<CLI call> --type=ldseguid <<< \$'ACGTT\\nTGCAA' (strand symmetry)" {
+@test "<CLI call> --type=ldseguid <<< \$'ACGTT\nTGCAA' (strand symmetry)" {
     truth=$("${cli_call[@]}" --type=ldseguid <<< $'AACGT\nTTGCA')
     run "${cli_call[@]}" --type=ldseguid <<< $'ACGTT\nTGCAA'
     assert_success
     assert_output "${truth}"
 }
 
-@test "<CLI call> --type=ldseguid <<< \$'-CGT\\nTGCA'" {
+@test "<CLI call> --type=ldseguid <<< \$'-CGT\nTGCA'" {
     run "${cli_call[@]}" --type=ldseguid <<< $'-CGT\nTGCA'
     assert_success
     assert_output "ldseguid=PVID4ZDkJEzFu2w2RLBCMQdZgvE"
@@ -147,26 +147,26 @@ setup() {
 ## --------------------------------------------------------
 ## cdseguid()
 ## --------------------------------------------------------
-@test "<CLI call> --type=cdseguid <<< \$'AACGT\\nTTGCA'" {
+@test "<CLI call> --type=cdseguid <<< \$'AACGT\nTTGCA'" {
     run "${cli_call[@]}" --type=cdseguid <<< $'AACGT\nTTGCA'
     assert_success
     assert_output "cdseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
 }
 
-@test "<CLI call> --type=cdseguid <<< \$'CGTAA\\nGCATT' (rotation invariant)" {
+@test "<CLI call> --type=cdseguid <<< \$'CGTAA\nGCATT' (rotation invariant)" {
     run "${cli_call[@]}" --type=cdseguid <<< $'CGTAA\nGCATT'
     assert_success
     assert_output "cdseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
 }
 
-@test "<CLI call> --type=cdseguid <<< \$'GTAAC\\nCATTG' (rotation invariant)" {
+@test "<CLI call> --type=cdseguid <<< \$'GTAAC\nCATTG' (rotation invariant)" {
     truth=$("${cli_call[@]}" --type=cdseguid <<< $'CGTAA\nGCATT')
     run "${cli_call[@]}" --type=cdseguid <<< $'GTAAC\nCATTG'
     assert_success
     assert_output "${truth}"
 }
 
-@test "<CLI call> --type=cdseguid <<< \$'GTTAC\\nCAATG' (strand symmetry)" {
+@test "<CLI call> --type=cdseguid <<< \$'GTTAC\nCAATG' (strand symmetry)" {
     truth=$("${cli_call[@]}" --type=cdseguid <<< $'CGTAA\nGCATT')
     run "${cli_call[@]}" --type=cdseguid <<< $'GTTAC\nCAATG'
     assert_success
@@ -239,13 +239,13 @@ setup() {
     assert_output "csseguid=LLaWk2Jb8NGt20QXhgm-cSVat34"
 }
 
-@test "<CLI call> --type=ldseguid --alphabet='{RNA}' <<< \$'AACGU\\nUUdTGCA'" {
+@test "<CLI call> --type=ldseguid --alphabet='{RNA}' <<< \$'AACGU\nUUdTGCA'" {
     run "${cli_call[@]}" --type=ldseguid --alphabet='{RNA}' <<< $'AACGU\nUUGCA'
     assert_success
     assert_output "ldseguid=x5iCPrq2tytNXOWgZroz1u6AN2Y"
 }
 
-@test "<CLI call> --type=cdseguid --alphabet='{RNA}' <<< \$'AACGU\\nUUGCA'" {
+@test "<CLI call> --type=cdseguid --alphabet='{RNA}' <<< \$'AACGU\nUUGCA'" {
     run "${cli_call[@]}" --type=cdseguid --alphabet='{RNA}' <<< $'AACGU\nUUGCA'
     assert_success
     assert_output "cdseguid=x5iCPrq2tytNXOWgZroz1u6AN2Y"
@@ -385,7 +385,7 @@ setup() {
 ## --------------------------------------------------------
 ## Exceptions: Too many lines of input data
 ## --------------------------------------------------------
-@test "<CLI call> --type=seguid <<< \$'ACTG\\nTGCA' (too many lines)" {
+@test "<CLI call> --type=seguid <<< \$'ACTG\nTGCA' (too many lines)" {
     run "${cli_call[@]}" --type=seguid <<< $'ACTG\nTGCA'
     assert_failure
 }
@@ -395,12 +395,12 @@ setup() {
     assert_failure
 }
 
-@test "<CLI call> --type=ldseguid <<< \$'ACTG\\nTGCA\\nTGCA' (too many lines)" {
+@test "<CLI call> --type=ldseguid <<< \$'ACTG\nTGCA\nTGCA' (too many lines)" {
     run "${cli_call[@]}" --type=ldseguid <<< $'ACTG\nTGCA\nTGCA'
     assert_failure
 }
 
-@test "<CLI call> --type=cdseguid <<< \$'ACTG\\nTGCA\\nTGCA' (too many lines)" {
+@test "<CLI call> --type=cdseguid <<< \$'ACTG\nTGCA\nTGCA' (too many lines)" {
     run "${cli_call[@]}" --type=cdseguid <<< $'ACTG\nTGCA\nTGCA'
     assert_failure
 }
@@ -419,7 +419,7 @@ setup() {
     assert_failure
 }
 
-@test "<CLI call> --type=ldseguid <<< \$' ACGT\\nTGCA' gives error (invalid symbol)" {
+@test "<CLI call> --type=ldseguid <<< \$' ACGT\nTGCA' gives error (invalid symbol)" {
     run "${cli_call[@]}" --type=ldseguid <<< $' ACGT\nTGCA '
     assert_failure
 }
@@ -428,12 +428,12 @@ setup() {
 ## --------------------------------------------------------
 ## Exceptions: Non-matching strands
 ## --------------------------------------------------------
-@test "<CLI call> --type=ldseguid <<< \$'ACGT\\nTGC' gives error (unbalanced lengths)" {
+@test "<CLI call> --type=ldseguid <<< \$'ACGT\nTGC' gives error (unbalanced lengths)" {
     run "${cli_call[@]}" --type=ldseguid <<< $'ACGT\nTGC'
     assert_failure
 }
 
-@test "<CLI call> --type=ldseguid <<< \$'ACGT\\nTGCC' gives error (incompatible sequences)" {
+@test "<CLI call> --type=ldseguid <<< \$'ACGT\nTGCC' gives error (incompatible sequences)" {
     run "${cli_call[@]}" --type=ldseguid <<< $'ACGT\nTGCC'
     assert_failure
 }
