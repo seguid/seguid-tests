@@ -61,7 +61,7 @@ setup() {
 ## lsseguid()
 ## --------------------------------------------------------
 @test "<CLI call> --type=lsseguid <<< 'ACGT'" {
-    run "${cli_call[@]}" --type=lsseguid <<< 'ACGT"
+    run "${cli_call[@]}" --type=lsseguid <<< 'ACGT'
     assert_success
     assert_output "lsseguid=IQiZThf2zKn_I1KtqStlEdsHYDQ"
 }
@@ -82,9 +82,22 @@ setup() {
     assert_output "ldseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
 }
 
+@test "<CLI call> --type=ldseguid <<< 'AACGT;ACGTT'" {
+    run "${cli_call[@]}" --type=ldseguid <<< 'AACGT;ACGTT'
+    assert_success
+    assert_output "ldseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
+}
+
 @test "<CLI call> --type=ldseguid <<< \$'ACGTT\nTGCAA' (strand symmetry)" {
     truth=$("${cli_call[@]}" --type=ldseguid <<< $'AACGT\nTTGCA')
     run "${cli_call[@]}" --type=ldseguid <<< $'ACGTT\nTGCAA'
+    assert_success
+    assert_output "${truth}"
+}
+
+@test "<CLI call> --type=ldseguid <<< 'ACGTT;AACGT' (strand symmetry)" {
+    truth=$("${cli_call[@]}" --type=ldseguid <<< 'AACGT;ACGTT')
+    run "${cli_call[@]}" --type=ldseguid <<< 'ACGTT;AACGT'
     assert_success
     assert_output "${truth}"
 }
@@ -95,8 +108,20 @@ setup() {
     assert_output "ldseguid=PVID4ZDkJEzFu2w2RLBCMQdZgvE"
 }
 
+@test "<CLI call> --type=ldseguid <<< '-CGT;ACGT'" {
+    run "${cli_call[@]}" --type=ldseguid <<< '-CGT;ACGT'
+    assert_success
+    assert_output "ldseguid=PVID4ZDkJEzFu2w2RLBCMQdZgvE"
+}
+
 @test "<CLI call> --type=ldseguid <<< \$'-CGT\nTGC-'" {
     run "${cli_call[@]}" --type=ldseguid <<< $'-CGT\nTGC-'
+    assert_success
+    assert_output "ldseguid=s_nCUnQCNz7NjQQTOBmoqIvXexA"
+}
+
+@test "<CLI call> --type=ldseguid <<< '-CGT;-CGT'" {
+    run "${cli_call[@]}" --type=ldseguid <<< '-CGT;-CGT'
     assert_success
     assert_output "ldseguid=s_nCUnQCNz7NjQQTOBmoqIvXexA"
 }
@@ -107,8 +132,20 @@ setup() {
     assert_output "ldseguid=4RNiS6tZ_3dnHmqD_15_83vEqKQ"
 }
 
+@test "<CLI call> --type=ldseguid <<< '--TTACA;-GTAATC'" {
+    run "${cli_call[@]}" --type=ldseguid <<< '--TTACA;-GTAATC'
+    assert_success
+    assert_output "ldseguid=4RNiS6tZ_3dnHmqD_15_83vEqKQ"
+}
+
 @test "<CLI call> --type=ldseguid <<< \$'A\nT' (single-symbol input)" {
     run "${cli_call[@]}" --type=ldseguid <<< $'A\nT'
+    assert_success
+    assert_output "ldseguid=ydezQsYTZgUCcb3-adxMaq_Xf8g"
+}
+
+@test "<CLI call> --type=ldseguid <<< 'A;T' (single-symbol input)" {
+    run "${cli_call[@]}" --type=ldseguid <<< 'A;T'
     assert_success
     assert_output "ldseguid=ydezQsYTZgUCcb3-adxMaq_Xf8g"
 }
@@ -153,8 +190,20 @@ setup() {
     assert_output "cdseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
 }
 
+@test "<CLI call> --type=cdseguid <<< 'AACGT;ACGTT'" {
+    run "${cli_call[@]}" --type=cdseguid <<< 'AACGT;ACGTT'
+    assert_success
+    assert_output "cdseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
+}
+
 @test "<CLI call> --type=cdseguid <<< \$'CGTAA\nGCATT' (rotation invariant)" {
     run "${cli_call[@]}" --type=cdseguid <<< $'CGTAA\nGCATT'
+    assert_success
+    assert_output "cdseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
+}
+
+@test "<CLI call> --type=cdseguid <<< 'CGTAA;TTACG' (rotation invariant)" {
+    run "${cli_call[@]}" --type=cdseguid <<< 'CGTAA;TTACG'
     assert_success
     assert_output "cdseguid=5fHMG19IbYxn7Yr7_sOCkvaaw7U"
 }
@@ -166,6 +215,13 @@ setup() {
     assert_output "${truth}"
 }
 
+@test "<CLI call> --type=cdseguid <<< 'GTAAC;GTTAC' (rotation invariant)" {
+    truth=$("${cli_call[@]}" --type=cdseguid <<< 'CGTAA;TTACG')
+    run "${cli_call[@]}" --type=cdseguid <<< 'GTAAC;GTTAC'
+    assert_success
+    assert_output "${truth}"
+}
+
 @test "<CLI call> --type=cdseguid <<< \$'GTTAC\nCAATG' (strand symmetry)" {
     truth=$("${cli_call[@]}" --type=cdseguid <<< $'CGTAA\nGCATT')
     run "${cli_call[@]}" --type=cdseguid <<< $'GTTAC\nCAATG'
@@ -173,8 +229,21 @@ setup() {
     assert_output "${truth}"
 }
 
+@test "<CLI call> --type=cdseguid <<< 'GTTAC;GTAAC' (strand symmetry)" {
+    truth=$("${cli_call[@]}" --type=cdseguid <<< 'CGTAA;TTACG')
+    run "${cli_call[@]}" --type=cdseguid <<< 'GTTAC;GTAAC'
+    assert_success
+    assert_output "${truth}"
+}
+
 @test "<CLI call> --type=cdseguid <<< \$'A\nT' (single-symbol input)" {
     run "${cli_call[@]}" --type=cdseguid <<< $'A\nT'
+    assert_success
+    assert_output "cdseguid=ydezQsYTZgUCcb3-adxMaq_Xf8g"
+}
+
+@test "<CLI call> --type=cdseguid <<< 'A;T' (single-symbol input)" {
+    run "${cli_call[@]}" --type=cdseguid <<< 'A;T'
     assert_success
     assert_output "cdseguid=ydezQsYTZgUCcb3-adxMaq_Xf8g"
 }
@@ -216,7 +285,7 @@ setup() {
 ## Alphabet: RNA
 ## --------------------------------------------------------
 @test "<CLI call> --alphabet='{RNA}' <<< 'ACGU'" {
-    run "${cli_call[@]}" --alphabet='{RNA}' <<< 'ACGU"
+    run "${cli_call[@]}" --alphabet='{RNA}' <<< 'ACGU'
     assert_success
     assert_output "seguid=LLaWk2Jb8NGt20QXhgm+cSVat34"
 }
@@ -239,14 +308,26 @@ setup() {
     assert_output "csseguid=LLaWk2Jb8NGt20QXhgm-cSVat34"
 }
 
-@test "<CLI call> --type=ldseguid --alphabet='{RNA}' <<< \$'AACGU\nUUdTGCA'" {
+@test "<CLI call> --type=ldseguid --alphabet='{RNA}' <<< \$'AACGU\nUUGCA'" {
     run "${cli_call[@]}" --type=ldseguid --alphabet='{RNA}' <<< $'AACGU\nUUGCA'
+    assert_success
+    assert_output "ldseguid=x5iCPrq2tytNXOWgZroz1u6AN2Y"
+}
+
+@test "<CLI call> --type=ldseguid --alphabet='{RNA}' <<< 'AACGU;ACGUU'" {
+    run "${cli_call[@]}" --type=ldseguid --alphabet='{RNA}' <<< 'AACGU;ACGUU'
     assert_success
     assert_output "ldseguid=x5iCPrq2tytNXOWgZroz1u6AN2Y"
 }
 
 @test "<CLI call> --type=cdseguid --alphabet='{RNA}' <<< \$'AACGU\nUUGCA'" {
     run "${cli_call[@]}" --type=cdseguid --alphabet='{RNA}' <<< $'AACGU\nUUGCA'
+    assert_success
+    assert_output "cdseguid=x5iCPrq2tytNXOWgZroz1u6AN2Y"
+}
+
+@test "<CLI call> --type=cdseguid --alphabet='{RNA}' <<< 'AACGU;ACGUU'" {
+    run "${cli_call[@]}" --type=cdseguid --alphabet='{RNA}' <<< 'AACGU;ACGUU'
     assert_success
     assert_output "cdseguid=x5iCPrq2tytNXOWgZroz1u6AN2Y"
 }
@@ -310,9 +391,23 @@ setup() {
     assert_output "ldseguid=bFZedILTms4ORUi3SSMfU0FUl7Q"
 }
 
+# Expanded epigenetic alphabet per Viner et al. (2024)
+@test "<CLI call> --type=ldseguid --alphabet='{DNA},m1,1m,h2,2h,f3,3f,c4,4c' <<< 'AmT2C;GhA1T'" {
+    run "${cli_call[@]}" --type=ldseguid --alphabet="{DNA},m1,1m,h2,2h,f3,3f,c4,4c" <<< 'AmT2C;GhA1T'
+    assert_success
+    assert_output "ldseguid=bFZedILTms4ORUi3SSMfU0FUl7Q"
+}
+
 # Ambigous expanded epigenetic alphabet per Viner et al. (2024)
 @test "<CLI call> --type=ldseguid --alphabet='{DNA},m1,1m,h2,2h,f3,3f,c4,4c,w6,6w,x7,7x,y8,8y,z9,9z' <<< \$'AmT2C\nT1AhG'" {
     run "${cli_call[@]}" --type=ldseguid --alphabet="{DNA},m1,1m,h2,2h,f3,3f,c4,4c,w6,6w,x7,7x,y8,8y,z9,9z" <<< $'AAAhyAmA\nTTT28T1T'
+    assert_success
+    assert_output "ldseguid=7-4HH4Evl9RhN0OzTK18QPoqjWo"
+}
+
+# Ambigous expanded epigenetic alphabet per Viner et al. (2024)
+@test "<CLI call> --type=ldseguid --alphabet='{DNA},m1,1m,h2,2h,f3,3f,c4,4c,w6,6w,x7,7x,y8,8y,z9,9z' <<< 'AAAhyAmA;T1T82TTT'" {
+    run "${cli_call[@]}" --type=ldseguid --alphabet="{DNA},m1,1m,h2,2h,f3,3f,c4,4c,w6,6w,x7,7x,y8,8y,z9,9z" <<< 'AAAhyAmA;T1T82TTT'
     assert_success
     assert_output "ldseguid=7-4HH4Evl9RhN0OzTK18QPoqjWo"
 }
@@ -327,6 +422,13 @@ setup() {
 # Non-bijective complementary alphabets
 @test "<CLI call> --type=ldseguid --alphabet='{DNA},AU,UA' <<< \$'AAT\nTUA'" {
     run "${cli_call[@]}" --type=ldseguid --alphabet='{DNA},AU,UA' <<< $'AAT\nTUA'
+    assert_success
+    assert_output "ldseguid=fHXyliATc43ySIxHY2Zjlepnupo"
+}
+
+# Non-bijective complementary alphabets
+@test "<CLI call> --type=ldseguid --alphabet='{DNA},AU,UA' <<< 'AAT;AUT'" {
+    run "${cli_call[@]}" --type=ldseguid --alphabet='{DNA},AU,UA' <<< 'AAT;AUT'
     assert_success
     assert_output "ldseguid=fHXyliATc43ySIxHY2Zjlepnupo"
 }
@@ -390,8 +492,18 @@ setup() {
     assert_failure
 }
 
+@test "<CLI call> --type=seguid <<< 'ACTG;ACGT' (too many strands)" {
+    run "${cli_call[@]}" --type=seguid <<< 'ACTG;ACGT'
+    assert_failure
+}
+
 @test "<CLI call> --type=lsseguid <<< \$'ACTG\nTGCA' (too many lines)" {
     run "${cli_call[@]}" --type=lsseguid <<< $'ACTG\nTGCA'
+    assert_failure
+}
+
+@test "<CLI call> --type=lsseguid <<< 'ACTG;ACGT' (too many strands)" {
+    run "${cli_call[@]}" --type=lsseguid <<< 'ACTG;ACGT'
     assert_failure
 }
 
@@ -400,8 +512,18 @@ setup() {
     assert_failure
 }
 
+@test "<CLI call> --type=ldseguid <<< 'ACTG;ACGT;TGCA' (too many strings)" {
+    run "${cli_call[@]}" --type=ldseguid <<< 'ACTG;ACGT;TGCA'
+    assert_failure
+}
+
 @test "<CLI call> --type=cdseguid <<< \$'ACTG\nTGCA\nTGCA' (too many lines)" {
     run "${cli_call[@]}" --type=cdseguid <<< $'ACTG\nTGCA\nTGCA'
+    assert_failure
+}
+
+@test "<CLI call> --type=cdseguid <<< 'ACTG;ACGT;TGCA' (too many strands)" {
+    run "${cli_call[@]}" --type=cdseguid <<< 'ACTG;ACGT;TGCA'
     assert_failure
 }
 
@@ -424,6 +546,11 @@ setup() {
     assert_failure
 }
 
+@test "<CLI call> --type=ldseguid <<< ' ACGT;ACGT' gives error (invalid symbol)" {
+    run "${cli_call[@]}" --type=ldseguid <<< ' ACGT;ACGT'
+    assert_failure
+}
+
 
 ## --------------------------------------------------------
 ## Exceptions: Non-matching strands
@@ -433,7 +560,17 @@ setup() {
     assert_failure
 }
 
+@test "<CLI call> --type=ldseguid <<< 'ACGT;CGT' gives error (unbalanced lengths)" {
+    run "${cli_call[@]}" --type=ldseguid <<< 'ACGT;CGT'
+    assert_failure
+}
+
 @test "<CLI call> --type=ldseguid <<< \$'ACGT\nTGCC' gives error (incompatible sequences)" {
     run "${cli_call[@]}" --type=ldseguid <<< $'ACGT\nTGCC'
+    assert_failure
+}
+
+@test "<CLI call> --type=ldseguid <<< 'ACGT;CCGT' gives error (incompatible sequences)" {
+    run "${cli_call[@]}" --type=ldseguid <<< 'ACGT;CCGT'
     assert_failure
 }
