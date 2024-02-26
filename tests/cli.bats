@@ -50,7 +50,7 @@ setup() {
     assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
 }
 
-@test "<CLI call> --type=seguid <<< \"\" (single-symbol input)" {
+@test "<CLI call> --type=seguid <<< \"A\" (single-symbol input)" {
     run "${cli_call[@]}" --type=seguid <<< "A"
     assert_success
     assert_output "seguid=bc1M4j2I4u6VaLpUbAB8Y9kTHBs"
@@ -66,7 +66,7 @@ setup() {
     assert_output "lsseguid=IQiZThf2zKn_I1KtqStlEdsHYDQ"
 }
 
-@test "<CLI call> --type=lsseguid <<< \"\" (single-symbol input)" {
+@test "<CLI call> --type=lsseguid <<< \"A\" (single-symbol input)" {
     run "${cli_call[@]}" --type=lsseguid <<< "A"
     assert_success
     assert_output "lsseguid=bc1M4j2I4u6VaLpUbAB8Y9kTHBs"
@@ -137,7 +137,7 @@ setup() {
     assert_output "${truth}"
 }
 
-@test "<CLI call> --type=csseguid <<< \"\" (single-symbol input)" {
+@test "<CLI call> --type=csseguid <<< \"A\" (single-symbol input)" {
     run "${cli_call[@]}" --type=csseguid <<< "A"
     assert_success
     assert_output "csseguid=bc1M4j2I4u6VaLpUbAB8Y9kTHBs"
