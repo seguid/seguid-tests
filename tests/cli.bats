@@ -38,20 +38,20 @@ setup() {
 ## --------------------------------------------------------
 ## SEGUID v1
 ## --------------------------------------------------------
-@test "<CLI call> <<< \"ACGT\"" {
-    run "${cli_call[@]}" <<< "ACGT"
+@test "<CLI call> <<< 'ACGT'" {
+    run "${cli_call[@]}" <<< 'ACGT'
     assert_success
     assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
 }
 
-@test "<CLI call> --type=seguid <<< \"ACGT\"" {
-    run "${cli_call[@]}" --type=seguid <<< "ACGT"
+@test "<CLI call> --type=seguid <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=seguid <<< 'ACGT'
     assert_success
     assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
 }
 
-@test "<CLI call> --type=seguid <<< \"A\" (single-symbol input)" {
-    run "${cli_call[@]}" --type=seguid <<< "A"
+@test "<CLI call> --type=seguid <<< 'A' (single-symbol input)" {
+    run "${cli_call[@]}" --type=seguid <<< 'A'
     assert_success
     assert_output "seguid=bc1M4j2I4u6VaLpUbAB8Y9kTHBs"
 }
@@ -60,14 +60,14 @@ setup() {
 ## --------------------------------------------------------
 ## lsseguid()
 ## --------------------------------------------------------
-@test "<CLI call> --type=lsseguid <<< \"ACGT\"" {
-    run "${cli_call[@]}" --type=lsseguid <<< "ACGT"
+@test "<CLI call> --type=lsseguid <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=lsseguid <<< 'ACGT"
     assert_success
     assert_output "lsseguid=IQiZThf2zKn_I1KtqStlEdsHYDQ"
 }
 
-@test "<CLI call> --type=lsseguid <<< \"A\" (single-symbol input)" {
-    run "${cli_call[@]}" --type=lsseguid <<< "A"
+@test "<CLI call> --type=lsseguid <<< 'A' (single-symbol input)" {
+    run "${cli_call[@]}" --type=lsseguid <<< 'A'
     assert_success
     assert_output "lsseguid=bc1M4j2I4u6VaLpUbAB8Y9kTHBs"
 }
@@ -117,28 +117,28 @@ setup() {
 ## --------------------------------------------------------
 ## csseguid()
 ## --------------------------------------------------------
-@test "<CLI call> --type=csseguid <<< \"ACGT\"" {
-    run "${cli_call[@]}" --type=csseguid <<< "ACGT"
+@test "<CLI call> --type=csseguid <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=csseguid <<< 'ACGT'
     assert_success
     assert_output "csseguid=IQiZThf2zKn_I1KtqStlEdsHYDQ"
 }
 
-@test "<CLI call> --type=csseguid <<< \"CGTA\" (rotation invariant)" {
-    truth=$("${cli_call[@]}" --type=csseguid <<< "ACGT")
-    run "${cli_call[@]}" --type=csseguid <<< "CGTA"
+@test "<CLI call> --type=csseguid <<< 'CGTA' (rotation invariant)" {
+    truth=$("${cli_call[@]}" --type=csseguid <<< 'ACGT')
+    run "${cli_call[@]}" --type=csseguid <<< 'CGTA'
     assert_success
     assert_output "${truth}"
 }
 
-@test "<CLI call> --type=csseguid <<< \"GTAC\" (rotation invariant)" {
-    truth=$("${cli_call[@]}" --type=csseguid <<< "ACGT")
-    run "${cli_call[@]}" --type=csseguid <<< "GTAC"
+@test "<CLI call> --type=csseguid <<< 'GTAC' (rotation invariant)" {
+    truth=$("${cli_call[@]}" --type=csseguid <<< 'ACGT')
+    run "${cli_call[@]}" --type=csseguid <<< 'GTAC'
     assert_success
     assert_output "${truth}"
 }
 
-@test "<CLI call> --type=csseguid <<< \"A\" (single-symbol input)" {
-    run "${cli_call[@]}" --type=csseguid <<< "A"
+@test "<CLI call> --type=csseguid <<< 'A' (single-symbol input)" {
+    run "${cli_call[@]}" --type=csseguid <<< 'A'
     assert_success
     assert_output "csseguid=bc1M4j2I4u6VaLpUbAB8Y9kTHBs"
 }
@@ -183,20 +183,20 @@ setup() {
 ## --------------------------------------------------------
 ## Output forms
 ## --------------------------------------------------------
-@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='long' <<< \"ACGT\"" {
-    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='long' <<< "ACGT"
+@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='long' <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='long' <<< 'ACGT'
     assert_success
     assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
 }
 
-@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='short' <<< \"ACGT\"" {
-    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='short' <<< "ACGT"
+@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='short' <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='short' <<< 'ACGT'
     assert_success
     assert_output "IQiZTh"
 }
 
-@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='both' <<< \"ACGT\"" {
-    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='both' <<< "ACGT"
+@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='both' <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='both' <<< 'ACGT'
     assert_success
     assert_output "IQiZTh seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
 }
@@ -205,8 +205,8 @@ setup() {
 ## --------------------------------------------------------
 ## Alphabet: DNA
 ## --------------------------------------------------------
-@test "<CLI call> --type=seguid --alphabet='{DNA}' <<< \"ACGT\"" {
-    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' <<< "ACGT"
+@test "<CLI call> --type=seguid --alphabet='{DNA}' <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' <<< 'ACGT'
     assert_success
     assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
 }
@@ -215,26 +215,26 @@ setup() {
 ## --------------------------------------------------------
 ## Alphabet: RNA
 ## --------------------------------------------------------
-@test "<CLI call> --alphabet='{RNA}' <<< \"ACGU\"" {
-    run "${cli_call[@]}" --alphabet='{RNA}' <<< "ACGU"
+@test "<CLI call> --alphabet='{RNA}' <<< 'ACGU'" {
+    run "${cli_call[@]}" --alphabet='{RNA}' <<< 'ACGU"
     assert_success
     assert_output "seguid=LLaWk2Jb8NGt20QXhgm+cSVat34"
 }
 
-@test "<CLI call>--type=seguid --alphabet='{RNA}' <<< \"ACGU\"" {
-    run "${cli_call[@]}" --type=seguid --alphabet='{RNA}' <<< "ACGU"
+@test "<CLI call>--type=seguid --alphabet='{RNA}' <<< 'ACGU'" {
+    run "${cli_call[@]}" --type=seguid --alphabet='{RNA}' <<< 'ACGU'
     assert_success
     assert_output "seguid=LLaWk2Jb8NGt20QXhgm+cSVat34"
 }
 
-@test "<CLI call> --type=lsseguid --alphabet='{RNA}' <<< \"ACGU\"" {
-    run "${cli_call[@]}" --type=lsseguid --alphabet='{RNA}' <<< "ACGU"
+@test "<CLI call> --type=lsseguid --alphabet='{RNA}' <<< 'ACGU'" {
+    run "${cli_call[@]}" --type=lsseguid --alphabet='{RNA}' <<< 'ACGU'
     assert_success
     assert_output "lsseguid=LLaWk2Jb8NGt20QXhgm-cSVat34"
 }
 
-@test "<CLI call> --type=csseguid --alphabet='{RNA}' <<< \"ACGU\"" {
-    run "${cli_call[@]}" --type=csseguid --alphabet='{RNA}' <<< "ACGU"
+@test "<CLI call> --type=csseguid --alphabet='{RNA}' <<< 'ACGU'" {
+    run "${cli_call[@]}" --type=csseguid --alphabet='{RNA}' <<< 'ACGU'
     assert_success
     assert_output "csseguid=LLaWk2Jb8NGt20QXhgm-cSVat34"
 }
@@ -257,19 +257,19 @@ setup() {
 ## --------------------------------------------------------
 ## Source: http://bioinformatics.anl.gov/seguid/ftp.aspx
 @test "<CLI call> --alphabet='{protein}' <<< 'PQITLWQRPIATIKVGGQLKEALLDTGADDTVLEEMNLPGRWKPKLIGGIGGFVKVRQYDQIPIEICGHQAIGTVLVGPTPANIIGRNLLTQIGCTLNF'" {
-    run "${cli_call[@]}" --alphabet='{protein}' <<< "PQITLWQRPIATIKVGGQLKEALLDTGADDTVLEEMNLPGRWKPKLIGGIGGFVKVRQYDQIPIEICGHQAIGTVLVGPTPANIIGRNLLTQIGCTLNF"
+    run "${cli_call[@]}" --alphabet='{protein}' <<< 'PQITLWQRPIATIKVGGQLKEALLDTGADDTVLEEMNLPGRWKPKLIGGIGGFVKVRQYDQIPIEICGHQAIGTVLVGPTPANIIGRNLLTQIGCTLNF'
     assert_success
     assert_output "seguid=N4/z+gxAPfkFozbb3f3vStDB/5g"
 }
 
 @test "<CLI call> --alphabet='{protein}' <<< 'MTEYKLVVVGAGGVGKSALTIQLTQNHFVDEYDPTIE'" {
-    run "${cli_call[@]}" --alphabet='{protein}' <<< "MTEYKLVVVGAGGVGKSALTIQLTQNHFVDEYDPTIE"
+    run "${cli_call[@]}" --alphabet='{protein}' <<< 'MTEYKLVVVGAGGVGKSALTIQLTQNHFVDEYDPTIE'
     assert_success
     assert_output "seguid=PdwDBhhFjE6qlPmSWCJCOjKIDeA"
 }
 
 @test "<CLI call> --alphabet='{protein}' <<< 'ARDNAKNTLYLQMSRLRSEDTAMYYCAR'" {
-    run "${cli_call[@]}" --alphabet='{protein}' <<< "ARDNAKNTLYLQMSRLRSEDTAMYYCAR"
+    run "${cli_call[@]}" --alphabet='{protein}' <<< 'ARDNAKNTLYLQMSRLRSEDTAMYYCAR'
     assert_success
     assert_output "seguid=IdtGC8ZYgDbkA0i4u4n0tiAQwng"
 }
@@ -278,20 +278,20 @@ setup() {
 ## --------------------------------------------------------
 ## Alphabet: custom
 ## --------------------------------------------------------
-@test "<CLI call> --alphabet='AU,UA,CG,GC' <<< \"ACGU\"" {
-    run "${cli_call[@]}" --alphabet='AU,UA,CG,GC' <<< "ACGU"
+@test "<CLI call> --alphabet='AU,UA,CG,GC' <<< 'ACGU'" {
+    run "${cli_call[@]}" --alphabet='AU,UA,CG,GC' <<< 'ACGU'
     assert_success
     assert_output "seguid=LLaWk2Jb8NGt20QXhgm+cSVat34"
 }
 
-@test "<CLI call> --type=seguid --alphabet='AT,TA,CG,GC' <<< \"ACGT\"" {
-    run "${cli_call[@]}" --type=seguid --alphabet='AT,TA,CG,GC' <<< "ACGT"
+@test "<CLI call> --type=seguid --alphabet='AT,TA,CG,GC' <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=seguid --alphabet='AT,TA,CG,GC' <<< 'ACGT'
     assert_success
     assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
 }
 
 @test "<CLI call> --alphabet='A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y' <<< 'ARDNAKNTLYLQMSRLRSEDTAMYYCAR'" {
-    run "${cli_call[@]}" --alphabet='A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y' <<< "ARDNAKNTLYLQMSRLRSEDTAMYYCAR"
+    run "${cli_call[@]}" --alphabet='A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y' <<< 'ARDNAKNTLYLQMSRLRSEDTAMYYCAR'
     assert_success
     assert_output "seguid=IdtGC8ZYgDbkA0i4u4n0tiAQwng"
 }
@@ -318,8 +318,8 @@ setup() {
 }
 
 # Non-bijective complementary alphabets
-@test "<CLI call> --alphabet='{DNA},AU,UA' <<< \"ACGTU\"" {
-    run "${cli_call[@]}" --alphabet='{DNA},AU,UA' <<< "ACGTU"
+@test "<CLI call> --alphabet='{DNA},AU,UA' <<< 'ACGTU'" {
+    run "${cli_call[@]}" --alphabet='{DNA},AU,UA' <<< 'ACGTU'
     assert_success
     assert_output "seguid=w13LHbo0Y8FHo+vaowojJkwh9nY"
 }
@@ -335,7 +335,7 @@ setup() {
 ## --------------------------------------------------------
 ## Use checksums as filenames
 ## --------------------------------------------------------
-@test "<CLI call> --type='lsseguid' <<< \"GATTACA\" checksum can be used as a filename" {
+@test "<CLI call> --type='lsseguid' <<< 'GATTACA' checksum can be used as a filename" {
     seq="GATTACA"
     ## Comment:
     ## The   SEGUID check is seguid=tp2jzeCM2e3W4yxtrrx09CMKa/8
@@ -356,28 +356,28 @@ setup() {
 ## --------------------------------------------------------
 ## Exceptions: Empty input is assume to be a user error
 ## --------------------------------------------------------
-@test "<CLI call> --type=seguid <<< \"\" (empty input)" {
-    run "${cli_call[@]}" --type=seguid <<< ""
+@test "<CLI call> --type=seguid <<< '' (empty input)" {
+    run "${cli_call[@]}" --type=seguid <<< ''
     assert_failure
 }
 
-@test "<CLI call> --type=lsseguid <<< \"\" (empty input)" {
-    run "${cli_call[@]}" --type=lsseguid <<< ""
+@test "<CLI call> --type=lsseguid <<< '' (empty input)" {
+    run "${cli_call[@]}" --type=lsseguid <<< ''
     assert_failure
 }
 
-@test "<CLI call> --type=csseguid <<< \"\" (empty input)" {
-    run "${cli_call[@]}" --type=csseguid <<< ""
+@test "<CLI call> --type=csseguid <<< '' (empty input)" {
+    run "${cli_call[@]}" --type=csseguid <<< ''
     assert_failure
 }
 
-@test "<CLI call> --type=ldseguid <<< \"\" (empty input)" {
-    run "${cli_call[@]}" --type=ldseguid <<< ""
+@test "<CLI call> --type=ldseguid <<< '' (empty input)" {
+    run "${cli_call[@]}" --type=ldseguid <<< ''
     assert_failure
 }
 
-@test "<CLI call> --type=cdseguid <<< \"\" (empty input)" {
-    run "${cli_call[@]}" --type=cdseguid <<< ""
+@test "<CLI call> --type=cdseguid <<< '' (empty input)" {
+    run "${cli_call[@]}" --type=cdseguid <<< ''
     assert_failure
 }
 
@@ -409,13 +409,13 @@ setup() {
 ## --------------------------------------------------------
 ## Exceptions: Invalid symbols
 ## --------------------------------------------------------
-@test "<CLI call> <<< \"aCGT\" gives error (invalid symbol)" {
-    run "${cli_call[@]}" <<< "aCGT"
+@test "<CLI call> <<< 'aCGT' gives error (invalid symbol)" {
+    run "${cli_call[@]}" <<< 'aCGT'
     assert_failure
 }
 
-@test "<CLI call> <<< \" ACGT\" gives error (invalid symbol)" {
-    run "${cli_call[@]}" <<< " ACGT"
+@test "<CLI call> <<< ' ACGT' gives error (invalid symbol)" {
+    run "${cli_call[@]}" <<< ' ACGT'
     assert_failure
 }
 
