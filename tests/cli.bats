@@ -9,6 +9,7 @@ setup() {
 }
 
 
+
 ## --------------------------------------------------------
 ## Help and version
 ## --------------------------------------------------------
@@ -452,6 +453,78 @@ setup() {
     assert_output "${seq}"
     rm "${pathname}"
     rmdir "${td}"
+}
+
+
+## --------------------------------------------------------
+## Lexicographic ordering in different locales
+## --------------------------------------------------------
+@test "<CLI call> --type=csseguid --alphabet='0,A' <<< '0A' with different LC_COLLATE" {
+    seq="0A"
+    alphabet="0,A"
+    truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
+    truth=${truth/lsseguid=/csseguid=}
+    echo "truth=${truth:?}"
+    for value in "C" "en_US.utf8" "et_EE.utf8"; do
+        export LC_COLLATE="${value}"
+        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
+        echo "cmd=${cmd}"
+        run bash -c "${cmd}"
+        assert_success
+        assert_output --partial "LC_COLLATE=${LC_COLLATE}"
+        assert_output --partial "${truth}"
+    done
+}
+
+@test "<CLI call> --type=csseguid --alphabet='0,a' <<< '0a' with different LC_COLLATE" {
+    seq="0a"
+    alphabet="0,a"
+    truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
+    truth=${truth/lsseguid=/csseguid=}
+    echo "truth=${truth:?}"
+    for value in "C" "en_US.utf8" "et_EE.utf8"; do
+        export LC_COLLATE="${value}"
+        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
+        echo "cmd=${cmd}"
+        run bash -c "${cmd}"
+        assert_success
+        assert_output --partial "LC_COLLATE=${LC_COLLATE}"
+        assert_output --partial "${truth}"
+    done
+}
+
+@test "<CLI call> --type=csseguid --alphabet='A,a' <<< 'Aa' with different LC_COLLATE" {
+    seq="Aa"
+    alphabet="A,a"
+    truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
+    truth=${truth/lsseguid=/csseguid=}
+    echo "truth=${truth:?}"
+    for value in "C" "en_US.utf8" "et_EE.utf8"; do
+        export LC_COLLATE="${value}"
+        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
+        echo "cmd=${cmd}"
+        run bash -c "${cmd}"
+        assert_success
+        assert_output --partial "LC_COLLATE=${LC_COLLATE}"
+        assert_output --partial "${truth}"
+    done
+}
+
+@test "<CLI call> --type=csseguid --alphabet='T,Z' <<< 'TZ' with different LC_COLLATE" {
+    seq="TZ"
+    alphabet="T,Z"
+    truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
+    truth=${truth/lsseguid=/csseguid=}
+    echo "truth=${truth:?}"
+    for value in "C" "en_US.utf8" "et_EE.utf8"; do
+        export LC_COLLATE="${value}"
+        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
+        echo "cmd=${cmd}"
+        run bash -c "${cmd}"
+        assert_success
+        assert_output --partial "LC_COLLATE=${LC_COLLATE}"
+        assert_output --partial "${truth}"
+    done
 }
 
 
