@@ -29,6 +29,13 @@ jobs:
       LC_COLLATE: ${{ matrix.config.language }}
 
     steps:
+    - name: Assert LANGUAGE availability
+      run: |
+        echo "LANGUAGE: ${LANGUAGE:-<not set>}"
+        if [[ -n ${LANGUAGE} ]]; then
+            locale -a | grep "${LANGUAGE}" || { >&2 echo "ERROR: LANGUAGE=${LANGUAGE} not installed"; exit 1; }
+        fi
+        
     - uses: actions/checkout@v4
 
     - name: Use Node.js ${{ matrix.config.node }}
