@@ -41,7 +41,7 @@ A pre-defined short version of this is:
 $ make check-cli/seguid-python
 ```
 
-Similarly, for  the CLI of the R **seguid** package, use:
+Similarly, for the CLI of the R **seguid** package, use:
 
 
 ```sh
@@ -52,6 +52,20 @@ or short:
 
 ```sh
 $ make check-cli/seguid-r
+```
+
+
+For the Javascript **seguid** package, use:
+
+
+```sh
+$ make check-cli CLI_CALL="npx seguid" 
+```
+
+or short:
+
+```sh
+$ make check-cli/seguid-javascript
 ```
 
 
