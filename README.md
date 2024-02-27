@@ -1,3 +1,4 @@
+[![JavaScript CLI checks](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-javascript.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-javascript.yml)
 [![Python CLI checks](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-python.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-python.yml)
 [![R CLI checks](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-r.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-r.yml)
 
