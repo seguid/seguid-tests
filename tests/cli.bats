@@ -465,9 +465,13 @@ setup() {
     truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
     truth=${truth/lsseguid=/csseguid=}
     echo "truth=${truth:?}"
+    missing=()
     for value in "C" "en_US.utf8" "et_EE.utf8"; do
         echo "LC_COLLATE='${LC_COLLATE}'"
-        locale -a | grep "${LC_COLLATE}"
+        if ! locale -a | grep "${LC_COLLATE}"; then
+            missing+=("${value}")
+            continue
+        fi
         export LC_COLLATE="${value}"
         cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
         echo "cmd=${cmd}"
@@ -476,6 +480,9 @@ setup() {
         assert_output --partial "LC_COLLATE=${LC_COLLATE}"
         assert_output --partial "${truth}"
     done
+    if [[ ${#missing[@]} -gt 0 ]]; then
+        skip "One or more languages were skipped because they are not installed: [n=${#missing[@]}] ${missing[*]}"
+    fi
 }
 
 @test "<CLI call> --type=csseguid --alphabet='0,a' <<< '0a' with different LC_COLLATE" {
@@ -484,8 +491,13 @@ setup() {
     truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
     truth=${truth/lsseguid=/csseguid=}
     echo "truth=${truth:?}"
+    missing=()
     for value in "C" "en_US.utf8" "et_EE.utf8"; do
         export LC_COLLATE="${value}"
+        if ! locale -a | grep "${LC_COLLATE}"; then
+            missing+=("${value}")
+            continue
+        fi
         cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
         echo "cmd=${cmd}"
         run bash -c "${cmd}"
@@ -493,6 +505,9 @@ setup() {
         assert_output --partial "LC_COLLATE=${LC_COLLATE}"
         assert_output --partial "${truth}"
     done
+    if [[ ${#missing[@]} -gt 0 ]]; then
+        skip "One or more languages were skipped because they are not installed: [n=${#missing[@]}] ${missing[*]}"
+    fi
 }
 
 @test "<CLI call> --type=csseguid --alphabet='A,a' <<< 'Aa' with different LC_COLLATE" {
@@ -501,8 +516,13 @@ setup() {
     truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
     truth=${truth/lsseguid=/csseguid=}
     echo "truth=${truth:?}"
+    missing=()
     for value in "C" "en_US.utf8" "et_EE.utf8"; do
         export LC_COLLATE="${value}"
+        if ! locale -a | grep "${LC_COLLATE}"; then
+            missing+=("${value}")
+            continue
+        fi
         cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
         echo "cmd=${cmd}"
         run bash -c "${cmd}"
@@ -510,6 +530,9 @@ setup() {
         assert_output --partial "LC_COLLATE=${LC_COLLATE}"
         assert_output --partial "${truth}"
     done
+    if [[ ${#missing[@]} -gt 0 ]]; then
+        skip "One or more languages were skipped because they are not installed: [n=${#missing[@]}] ${missing[*]}"
+    fi
 }
 
 @test "<CLI call> --type=csseguid --alphabet='T,Z' <<< 'TZ' with different LC_COLLATE" {
@@ -518,8 +541,13 @@ setup() {
     truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
     truth=${truth/lsseguid=/csseguid=}
     echo "truth=${truth:?}"
+    missing=()
     for value in "C" "en_US.utf8" "et_EE.utf8"; do
         export LC_COLLATE="${value}"
+        if ! locale -a | grep "${LC_COLLATE}"; then
+            missing+=("${value}")
+            continue
+        fi
         cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
         echo "cmd=${cmd}"
         run bash -c "${cmd}"
@@ -527,6 +555,9 @@ setup() {
         assert_output --partial "LC_COLLATE=${LC_COLLATE}"
         assert_output --partial "${truth}"
     done
+    if [[ ${#missing[@]} -gt 0 ]]; then
+        skip "One or more languages were skipped because they are not installed: [n=${#missing[@]}] ${missing[*]}"
+    fi
 }
 
 
