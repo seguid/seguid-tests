@@ -466,6 +466,8 @@ setup() {
     truth=${truth/lsseguid=/csseguid=}
     echo "truth=${truth:?}"
     for value in "C" "en_US.utf8" "et_EE.utf8"; do
+        echo "LC_COLLATE='${LC_COLLATE}'"
+        locale -a | grep "${LC_COLLATE}"
         export LC_COLLATE="${value}"
         cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
         echo "cmd=${cmd}"

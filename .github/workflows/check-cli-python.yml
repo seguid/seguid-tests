@@ -68,6 +68,13 @@ jobs:
         echo "LANGUAGE: ${LANGUAGE:-<not set>}"
         echo "LC_COLLATE: ${LC_COLLATE:-<not set>}"
 
+    - name: Assert LANGUAGE availability
+      run: |
+        echo "LANGUAGE: ${LANGUAGE:-<not set>}"
+        if [[ -n ${LANGUAGE} ]]; then
+            locale -a | grep "${LANGUAGE}" || { >&2 echo "ERROR: LANGUAGE=${LANGUAGE} not installed"; exit 1; }
+        fi
+        
     - name: Check CLI
       if: runner.os != 'Windows'
       run: make check-cli/seguid-python
