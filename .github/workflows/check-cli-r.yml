@@ -63,7 +63,7 @@ jobs:
 
       - name: Check CLI
         if: runner.os != 'Windows'
-        run: make check-cli/seguid-python
+        run: make check-cli/seguid-r
 
       - name: Upload check results
         if: failure()

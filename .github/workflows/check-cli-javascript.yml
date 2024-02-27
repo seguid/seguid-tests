@@ -1,6 +1,6 @@
 on: [push, pull_request]
 
-name: "CLI check"
+name: "JavaScript CLI check"
 
 jobs:
   check:
@@ -33,7 +33,7 @@ jobs:
 
     - name: Install package
       run: |
-        npm install
+        npm install seguid/seguid-javascript
         npm list
 
     - name: Check CLI
