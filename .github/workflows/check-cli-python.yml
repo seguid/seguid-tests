@@ -20,22 +20,28 @@ jobs:
 
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.python }})
+    name: Python ${{ matrix.config.python }} on ${{ matrix.config.os }} [${{ matrix.config.language }}]
 
     strategy:
       fail-fast: false
 
       matrix:
         config:
-#          - {os: macOS-latest,   python: '3.12' }
           - {os: macOS-latest,   python: '3.11' }
           - {os: ubuntu-latest,  python: '3.12' }
           - {os: ubuntu-latest,  python: '3.11' }
           - {os: ubuntu-latest,  python: '3.10' }
-          - {os: ubuntu-latest,  python: '3.9' }
-          - {os: ubuntu-latest,  python: '3.8' }
-          - {os: ubuntu-20.04,   python: '3.6' }
+          - {os: ubuntu-latest,  python: '3.9'  }
+          - {os: ubuntu-latest,  python: '3.8'  }
+          - {os: ubuntu-20.04,   python: '3.6'  }
+          - {os: ubuntu-latest,  python: '3.11', language: 'C'          }
+          - {os: ubuntu-latest,  python: '3.11', language: 'en_US.utf8' }
+          - {os: ubuntu-latest,  python: '3.11', language: 'et_EE.utf8' }
 
+    env:
+      LANGUAGE: ${{ matrix.config.language }}
+      LC_COLLATE: ${{ matrix.config.language }}
+      
     steps:
     - uses: actions/checkout@v4
 
@@ -59,6 +65,8 @@ jobs:
         bash --version
         python --version
         python -m pip list
+        echo "LANGUAGE: ${LANGUAGE:-<not set>}"
+        echo "LC_COLLATE: ${LC_COLLATE:-<not set>}"
 
     - name: Check CLI
       if: runner.os != 'Windows'
