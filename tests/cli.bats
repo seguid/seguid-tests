@@ -8,6 +8,37 @@ setup() {
     echo "cli_call: [n=${#cli_call[@]}] ${cli_call[*]}"
 }
 
+assert_symbols_in_alphabet() {
+  local name set symbols
+  name="${1:?}"
+  set="${2:?}"
+  symbols=${set//,/}
+  "${cli_call[@]}" --alphabet="${name}" <<< "${symbols}"
+}
+
+letters=({a..z})
+LETTERS=({A..Z})
+digits=({0..9})
+alpha=("${letters[@]}" "${LETTERS[@]}")
+alnum=("${alpha[@]}" "${digits[@]}")
+
+assert_symbols_not_in_alphabet() {
+  local name set symbol
+  name="${1:?}"
+  set="${2:?}"
+  set="$(sed 's/,//g' <<< "${set}")"
+  echo "Set: ${set}"
+  echo "Test symbols: [n=${#alnum[@]}] ${alnum[*]}"
+  for symbol in "${alnum[@]}"; do
+    if grep -q "${symbol}" <<< "${set}"; then
+      continue
+    fi
+    echo "Symbol: '${symbol}'"
+    if "${cli_call[@]}" --alphabet="${name}" <<< "${symbol}" 2> /dev/null; then
+      fail "Alphabet '${name}' does not support symbol '${symbol}'"
+    fi
+  done
+}
 
 
 ## --------------------------------------------------------
@@ -273,6 +304,7 @@ setup() {
 }
 
 
+
 ## --------------------------------------------------------
 ## Alphabet: DNA
 ## --------------------------------------------------------
@@ -522,6 +554,47 @@ setup() {
     assert_success
     assert_output --partial "LC_COLLATE=${LC_COLLATE}"
     assert_output --partial "${truth}"
+}
+
+
+## --------------------------------------------------------
+## Predefined alphabets
+## --------------------------------------------------------
+dna="CG,AT"
+rna="CG,AU"
+protein="A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y"
+dna_iupac="CG,AT,WW,SS,MK,RY,BV,DH,VB,NN"
+rna_iupac="CG,AU,WW,SS,MK,RY,BV,DH,VB,NN"
+protein_iupac="A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y,B,J,Z,X"
+
+@test "<CLI call> --alphabet=\"{DNA}\" <<< '...'" {
+  assert_symbols_in_alphabet "{DNA}" "${dna}"
+  assert_symbols_not_in_alphabet "{DNA}" "${dna}"
+}
+
+@test "<CLI call> --alphabet=\"{RNA}\" <<< '...'" {
+  assert_symbols_in_alphabet "{RNA}" "${rna}"
+  assert_symbols_not_in_alphabet "{RNA}" "${rna}"
+}
+
+@test "<CLI call> --alphabet=\"{protein}\" <<< '...'" {
+  assert_symbols_in_alphabet "{protein}" "${protein}"
+  assert_symbols_not_in_alphabet "{protein}" "${protein}"
+}
+
+@test "<CLI call> --alphabet=\"{DNA-IUPAC}\" <<< '...'" {
+  assert_symbols_in_alphabet "{DNA-IUPAC}" "${dna_iupac}"
+  assert_symbols_not_in_alphabet "{DNA-IUPAC}" "${dna_iupac}"
+}
+
+@test "<CLI call> --alphabet=\"{RNA-IUPAC}\" <<< '...'" {
+  assert_symbols_in_alphabet "{RNA-IUPAC}" "${rna_iupac}"
+  assert_symbols_not_in_alphabet "{RNA-IUPAC}" "${rna_iupac}"
+}
+
+@test "<CLI call> --alphabet=\"{protein-IUPAC}\" <<< '...'" {
+  assert_symbols_in_alphabet "{protein-IUPAC}" "${protein_iupac}"
+  assert_symbols_not_in_alphabet "{protein-IUPAC}" "${protein_iupac}"
 }
 
 
