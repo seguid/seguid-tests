@@ -42,16 +42,11 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       
     steps:
-    - name: Assert LANGUAGE availability
+    - name: Assert LANGUAGE availabilities
+      if: runner.os == 'Linux'
       run: |
-        echo "LANGUAGE: ${LANGUAGE:-<not set>}"
-        if [[ -n ${LANGUAGE} ]]; then
-            if ! locale -a | grep "${LANGUAGE}"; then
-                sudo apt-get update && sudo apt-get install tzdata locales -y
-                sudo locale-gen "${LANGUAGE}"
-            fi
-            locale -a | grep "${LANGUAGE}" || { >&2 echo "ERROR: LANGUAGE=${LANGUAGE} not installed"; exit 1; }
-        fi
+        sudo locale-gen et_EE.utf8
+        locale -a | grep "${LANGUAGE}" || { >&2 echo "ERROR: LANGUAGE=${LANGUAGE} not installed"; exit 1; }
       
     - uses: actions/checkout@v4
 

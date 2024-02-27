@@ -460,6 +460,7 @@ setup() {
 ## Lexicographic ordering in different locales
 ## --------------------------------------------------------
 @test "<CLI call> --type=csseguid --alphabet='0,A' <<< '0A' with different LC_COLLATE" {
+    local alphabet seq missing truth
     seq="0A"
     alphabet="0,A"
     truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
@@ -472,8 +473,8 @@ setup() {
             missing+=("${value}")
             continue
         fi
-        export LC_COLLATE="${value}"
-        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
+        LC_COLLATE="${value}"
+        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[*]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
         echo "cmd=${cmd}"
         run bash -c "${cmd}"
         assert_success
@@ -486,6 +487,7 @@ setup() {
 }
 
 @test "<CLI call> --type=csseguid --alphabet='0,a' <<< '0a' with different LC_COLLATE" {
+    local alphabet seq missing truth
     seq="0a"
     alphabet="0,a"
     truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
@@ -493,12 +495,12 @@ setup() {
     echo "truth=${truth:?}"
     missing=()
     for value in "C" "en_US.utf8" "et_EE.utf8"; do
-        export LC_COLLATE="${value}"
+        LC_COLLATE="${value}"
         if ! locale -a | grep "${LC_COLLATE}"; then
             missing+=("${value}")
             continue
         fi
-        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
+        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[*]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
         echo "cmd=${cmd}"
         run bash -c "${cmd}"
         assert_success
@@ -511,6 +513,7 @@ setup() {
 }
 
 @test "<CLI call> --type=csseguid --alphabet='A,a' <<< 'Aa' with different LC_COLLATE" {
+    local alphabet seq missing truth
     seq="Aa"
     alphabet="A,a"
     truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
@@ -518,12 +521,12 @@ setup() {
     echo "truth=${truth:?}"
     missing=()
     for value in "C" "en_US.utf8" "et_EE.utf8"; do
-        export LC_COLLATE="${value}"
+        LC_COLLATE="${value}"
         if ! locale -a | grep "${LC_COLLATE}"; then
             missing+=("${value}")
             continue
         fi
-        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
+        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[*]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
         echo "cmd=${cmd}"
         run bash -c "${cmd}"
         assert_success
@@ -536,6 +539,7 @@ setup() {
 }
 
 @test "<CLI call> --type=csseguid --alphabet='T,Z' <<< 'TZ' with different LC_COLLATE" {
+    local alphabet seq missing truth
     seq="TZ"
     alphabet="T,Z"
     truth=$("${cli_call[@]}" --type=lsseguid --alphabet="${alphabet}" <<< "${seq}")
@@ -543,12 +547,12 @@ setup() {
     echo "truth=${truth:?}"
     missing=()
     for value in "C" "en_US.utf8" "et_EE.utf8"; do
-        export LC_COLLATE="${value}"
+        LC_COLLATE="${value}"
         if ! locale -a | grep "${LC_COLLATE}"; then
             missing+=("${value}")
             continue
         fi
-        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[@]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
+        cmd="echo 'LC_COLLATE=${LC_COLLATE:-<not set>}'; ${cli_call[*]} --type=csseguid --alphabet='${alphabet}' <<< '${seq}'"
         echo "cmd=${cmd}"
         run bash -c "${cmd}"
         assert_success
