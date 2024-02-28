@@ -562,10 +562,10 @@ assert_symbols_not_in_alphabet() {
 ## --------------------------------------------------------
 dna="CG,AT"
 rna="CG,AU"
-protein="A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y"
+protein="A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y,O,U"
 dna_extended="CG,AT,WW,SS,MK,RY,BV,DH,VB,NN"
 rna_extended="CG,AU,WW,SS,MK,RY,BV,DH,VB,NN"
-protein_extended="A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y,U,O,B,J,Z,X"
+protein_extended="A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y,B,O,U,J,Z,X"
 
 @test "<CLI call> --alphabet=\"{DNA}\" <<< '...'" {
   assert_symbols_in_alphabet "{DNA}" "${dna}"
