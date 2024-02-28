@@ -563,9 +563,9 @@ assert_symbols_not_in_alphabet() {
 dna="CG,AT"
 rna="CG,AU"
 protein="A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y"
-dna_iupac="CG,AT,WW,SS,MK,RY,BV,DH,VB,NN"
-rna_iupac="CG,AU,WW,SS,MK,RY,BV,DH,VB,NN"
-protein_iupac="A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y,B,J,Z,X"
+dna_extended="CG,AT,WW,SS,MK,RY,BV,DH,VB,NN"
+rna_extended="CG,AU,WW,SS,MK,RY,BV,DH,VB,NN"
+protein_extended="A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y,U,O,B,J,Z,X"
 
 @test "<CLI call> --alphabet=\"{DNA}\" <<< '...'" {
   assert_symbols_in_alphabet "{DNA}" "${dna}"
@@ -582,19 +582,19 @@ protein_iupac="A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y,B,J,Z,X"
   assert_symbols_not_in_alphabet "{protein}" "${protein}"
 }
 
-@test "<CLI call> --alphabet=\"{DNA-IUPAC}\" <<< '...'" {
-  assert_symbols_in_alphabet "{DNA-IUPAC}" "${dna_iupac}"
-  assert_symbols_not_in_alphabet "{DNA-IUPAC}" "${dna_iupac}"
+@test "<CLI call> --alphabet=\"{DNA-extended}\" <<< '...'" {
+  assert_symbols_in_alphabet "{DNA-extended}" "${dna_extended}"
+  assert_symbols_not_in_alphabet "{DNA-extended}" "${dna_extended}"
 }
 
-@test "<CLI call> --alphabet=\"{RNA-IUPAC}\" <<< '...'" {
-  assert_symbols_in_alphabet "{RNA-IUPAC}" "${rna_iupac}"
-  assert_symbols_not_in_alphabet "{RNA-IUPAC}" "${rna_iupac}"
+@test "<CLI call> --alphabet=\"{RNA-extended}\" <<< '...'" {
+  assert_symbols_in_alphabet "{RNA-extended}" "${rna_extended}"
+  assert_symbols_not_in_alphabet "{RNA-extended}" "${rna_extended}"
 }
 
-@test "<CLI call> --alphabet=\"{protein-IUPAC}\" <<< '...'" {
-  assert_symbols_in_alphabet "{protein-IUPAC}" "${protein_iupac}"
-  assert_symbols_not_in_alphabet "{protein-IUPAC}" "${protein_iupac}"
+@test "<CLI call> --alphabet=\"{protein-extended}\" <<< '...'" {
+  assert_symbols_in_alphabet "{protein-extended}" "${protein_extended}"
+  assert_symbols_not_in_alphabet "{protein-extended}" "${protein_extended}"
 }
 
 
