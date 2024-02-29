@@ -24,4 +24,4 @@ check-cli/seguid-python:
 	$(MAKE) check-cli CLI_CALL="python -m seguid" 
 
 check-cli/seguid-r:
-	$(MAKE) check-cli CLI_CALL="Rscript -e seguid::seguid --args"
+	$(MAKE) check-cli CLI_CALL="Rscript --no-init-file -e seguid::seguid --args"
