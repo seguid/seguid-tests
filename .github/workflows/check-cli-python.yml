@@ -4,8 +4,8 @@ on:
   pull_request:
   
   schedule:
-    ## Run every 3 hours
-    - cron:  '0 */3 * * *'
+    ## Run every 12 hours
+    - cron:  '0 */12 * * *'
     
 name: "Python CLI check"
 

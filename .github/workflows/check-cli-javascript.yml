@@ -1,4 +1,11 @@
-on: [push, pull_request]
+on:
+  push:
+  
+  pull_request:
+  
+  schedule:
+    ## Run every 12 hours
+    - cron:  '0 */12 * * *'
 
 name: "JavaScript CLI check"
 
