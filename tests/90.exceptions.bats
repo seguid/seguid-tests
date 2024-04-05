@@ -39,6 +39,15 @@ setup() {
 
 
 ## --------------------------------------------------------
+## Exceptions: Too few lines of input data
+## --------------------------------------------------------
+@test " --type=ldseguid <<< 'AATTA' (one strand specified when two is expected)" {
+run "${cli_call[@]}" --type=ldseguid <<< 'AATTA'
+assert_failure
+}
+
+
+## --------------------------------------------------------
 ## Exceptions: Too many lines of input data
 ## --------------------------------------------------------
 @test "<CLI call> --type=seguid <<< \$'ACTG\nTGCA' (too many lines)" {
@@ -127,4 +136,23 @@ setup() {
 @test "<CLI call> --type=ldseguid <<< 'ACGT;CCGT' gives error (incompatible sequences)" {
     run "${cli_call[@]}" --type=ldseguid <<< 'ACGT;CCGT'
     assert_failure
+}
+
+
+## --------------------------------------------------------
+## Invalid alphabet specifications
+## --------------------------------------------------------
+@test " --alphabet='{dna}' <<< 'ACGT' (unknown alphabet)" {
+run "${cli_call[@]}" --alphabet='{dna}' <<< 'ACGT'
+assert_failure
+}
+
+@test " --alphabet='A,G ,C,T' <<< 'ACGT' (extra space)" {
+run "${cli_call[@]}" --alphabet='A,G ,C,T' <<< 'ACGT'
+assert_failure
+}
+
+@test " --type=ldseguid --alphabet='A,G,C,T' <<< 'ACGT;ACGT' (single-stranded alphabet for a double-stranded sequence)" {
+run "${cli_call[@]}" --type=ldseguid --alphabet='A,G,C,T' <<< 'ACGT;ACGT'
+assert_failure
 }
