@@ -49,10 +49,10 @@ api_call() {
   printf "%s\n" "${call}" >> "${tf}"
 
   ## Call script
-  >&3 cat "${tf}"
+#  >&3 cat "${tf}"
   "${script_call[@]}" "${tf}"
   res=$?
-#  rm "${tf}"
+  rm "${tf}"
   return "${res}"
 }
 
