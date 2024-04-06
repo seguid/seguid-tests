@@ -49,7 +49,11 @@ api_call() {
   printf "%s\n" "${call}" >> "${tf}"
 
   ## Call script
-#  >&3 cat "${tf}"
+  if ${BATS_DEBUG:-false}; then
+    >&3 echo "--- script ----------------------"
+    >&3 cat "${tf}"
+    >&3 echo "---------------------------------"
+  fi
   "${script_call[@]}" "${tf}"
   res=$?
   rm "${tf}"
