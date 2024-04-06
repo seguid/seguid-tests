@@ -7,16 +7,16 @@ BATS = bats/bin/bats
 all: check-cli/ALL
 
 assert-bats:
-	git submodule init
-	git submodule update
-	cd tests && command -v "${BATS}" || { >&2 echo "ERROR: bats is not installed"; exit 1; }
+	@git submodule init
+	@git submodule update
+	@cd tests && command -v "${BATS}" || { >&2 echo "ERROR: bats is not installed"; exit 1; }
 
 
 # ------------------------------------------------------------
 # Check CLI API
 # ------------------------------------------------------------
 assert-CLI_CALL:
-	[[ -n "${CLI_CALL}" ]] || { >&2 echo "ERROR: CLI_CALL is not specified"; exit 1; }
+	@[[ -n "${CLI_CALL}" ]] || { >&2 echo "ERROR: CLI_CALL is not specified"; exit 1; }
 
 check-cli: assert-CLI_CALL assert-bats
 	cd tests && $(BATS) *.bats
@@ -38,7 +38,7 @@ check-cli/ALL: check-cli/seguid-javascript check-cli/seguid-python check-cli/seg
 # Check language API
 # ------------------------------------------------------------
 assert-SCRIPT_CALL:
-	[[ -n "${SCRIPT_CALL}" ]] || { >&2 echo "ERROR: SCRIPT_CALL is not specified"; exit 1; }
+	@[[ -n "${SCRIPT_CALL}" ]] || { >&2 echo "ERROR: SCRIPT_CALL is not specified"; exit 1; }
 
 check-api: assert-SCRIPT_CALL assert-bats
 	cd tests-api && $(BATS) *.bats
