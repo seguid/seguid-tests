@@ -9,7 +9,7 @@ all: check-cli/ALL
 assert-bats:
 	@git submodule init
 	@git submodule update
-	@cd tests && command -v "${BATS}" || { >&2 echo "ERROR: bats is not installed"; exit 1; }
+	@cd tests && command -v "${BATS}" > /dev/null || { >&2 echo "ERROR: bats is not installed"; exit 1; }
 
 
 # ------------------------------------------------------------
