@@ -202,29 +202,6 @@ setup() {
 
 
 ## --------------------------------------------------------
-## Output forms
-## --------------------------------------------------------
-@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='long' <<< 'ACGT'" {
-    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='long' <<< 'ACGT'
-    assert_success
-    assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
-}
-
-@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='short' <<< 'ACGT'" {
-    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='short' <<< 'ACGT'
-    assert_success
-    assert_output "IQiZTh"
-}
-
-@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='both' <<< 'ACGT'" {
-    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='both' <<< 'ACGT'
-    assert_success
-    assert_output "IQiZTh seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
-}
-
-
-
-## --------------------------------------------------------
 ## Alphabet: DNA
 ## --------------------------------------------------------
 @test "<CLI call> --type=seguid --alphabet='{DNA}' <<< 'ACGT'" {
@@ -306,6 +283,28 @@ setup() {
     run "${cli_call[@]}" --alphabet='{protein}' <<< 'ARDNAKNTLYLQMSRLRSEDTAMYYCAR'
     assert_success
     assert_output "seguid=IdtGC8ZYgDbkA0i4u4n0tiAQwng"
+}
+
+
+## --------------------------------------------------------
+## Output forms
+## --------------------------------------------------------
+@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='long' <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='long' <<< 'ACGT'
+    assert_success
+    assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
+}
+
+@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='short' <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='short' <<< 'ACGT'
+    assert_success
+    assert_output "IQiZTh"
+}
+
+@test "<CLI call> --type=seguid --alphabet='{DNA}' --form='both' <<< 'ACGT'" {
+    run "${cli_call[@]}" --type=seguid --alphabet='{DNA}' --form='both' <<< 'ACGT'
+    assert_success
+    assert_output "IQiZTh seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
 }
 
 
