@@ -202,3 +202,26 @@ setup() {
     assert_success
     assert_output "seguid=IdtGC8ZYgDbkA0i4u4n0tiAQwng"
 }
+
+
+
+## --------------------------------------------------------
+## Output forms
+## --------------------------------------------------------
+@test "seguid('ACGT', '{DNA}', 'long')" {
+    run api_call "seguid" "'ACGT'" "'{DNA}'" "'long'"
+    assert_success
+    assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
+}
+
+@test "seguid('ACGT' '{DNA}', 'short')" {
+    run api_call "seguid" "'ACGT'" "'{DNA}'" "'short'"
+    assert_success
+    assert_output "IQiZTh"
+}
+
+@test "seguid('ACGT', '{DNA}', 'both')" {
+    run api_call "seguid" "'ACGT'" "'{DNA}'" "'both'"
+    assert_success
+    assert_output "IQiZTh seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
+}
