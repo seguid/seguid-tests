@@ -134,7 +134,7 @@ setup() {
 ## --------------------------------------------------------
 ## Alphabet: DNA
 ## --------------------------------------------------------
-@test "seguid('{DNA}' <<< 'ACGT'" {
+@test "seguid('ACGT', '{DNA}')" {
     run api_call "seguid" "'ACGT'" "'{DNA}'"
     assert_success
     assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
@@ -144,12 +144,6 @@ setup() {
 ## --------------------------------------------------------
 ## Alphabet: RNA
 ## --------------------------------------------------------
-@test "<CLI call>('ACGU', '{RNA}')" {
-    run api_call "seguid" "'ACGU'" "'{RNA}'"
-    assert_success
-    assert_output "seguid=LLaWk2Jb8NGt20QXhgm+cSVat34"
-}
-
 @test "seguid('ACGU', '{RNA}')" {
     run api_call "seguid" "'ACGU'" "'{RNA}'"
     assert_success
@@ -214,7 +208,7 @@ setup() {
     assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
 }
 
-@test "seguid('ACGT' '{DNA}', 'short')" {
+@test "seguid('ACGT', '{DNA}', 'short')" {
     run api_call "seguid" "'ACGT'" "'{DNA}'" "'short'"
     assert_success
     assert_output "IQiZTh"
