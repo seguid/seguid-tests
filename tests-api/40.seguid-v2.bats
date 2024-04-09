@@ -128,3 +128,77 @@ setup() {
     assert_success
     assert_output "cdseguid=ydezQsYTZgUCcb3-adxMaq_Xf8g"
 }
+
+
+
+## --------------------------------------------------------
+## Alphabet: DNA
+## --------------------------------------------------------
+@test "seguid('{DNA}' <<< 'ACGT'" {
+    run api_call "seguid" "'ACGT'" "'{DNA}'"
+    assert_success
+    assert_output "seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
+}
+
+
+## --------------------------------------------------------
+## Alphabet: RNA
+## --------------------------------------------------------
+@test "<CLI call>('ACGU', '{RNA}')" {
+    run api_call "seguid" "'ACGU'" "'{RNA}'"
+    assert_success
+    assert_output "seguid=LLaWk2Jb8NGt20QXhgm+cSVat34"
+}
+
+@test "seguid('ACGU', '{RNA}')" {
+    run api_call "seguid" "'ACGU'" "'{RNA}'"
+    assert_success
+    assert_output "seguid=LLaWk2Jb8NGt20QXhgm+cSVat34"
+}
+
+@test "lsseguid('ACGU', '{RNA}')" {
+    run api_call "lsseguid" "'ACGU'" "'{RNA}'"
+    assert_success
+    assert_output "lsseguid=LLaWk2Jb8NGt20QXhgm-cSVat34"
+}
+
+@test "csseguid('ACGU', '{RNA}')" {
+    run api_call "csseguid" "'ACGU'" "'{RNA}'"
+    assert_success
+    assert_output "csseguid=LLaWk2Jb8NGt20QXhgm-cSVat34"
+}
+
+@test "ldseguid('AACGU', 'ACGUU', '{RNA}')" {
+    run api_call "ldseguid" "'AACGU'" "'ACGUU'" "'{RNA}'"
+    assert_success
+    assert_output "ldseguid=x5iCPrq2tytNXOWgZroz1u6AN2Y"
+}
+
+@test "cdseguid('AACGU', 'ACGUU', '{RNA}')" {
+    run api_call "cdseguid" "'AACGU'" "'ACGUU'" "'{RNA}'"
+    assert_success
+    assert_output "cdseguid=x5iCPrq2tytNXOWgZroz1u6AN2Y"
+}
+
+
+## --------------------------------------------------------
+## Alphabet: protein
+## --------------------------------------------------------
+## Source: http://bioinformatics.anl.gov/seguid/ftp.aspx
+@test "seguid('PQITLWQRPIATIKVGGQLKEALLDTGADDTVLEEMNLPGRWKPKLIGGIGGFVKVRQYDQIPIEICGHQAIGTVLVGPTPANIIGRNLLTQIGCTLNF', '{protein}')" {
+    run api_call "seguid" "'PQITLWQRPIATIKVGGQLKEALLDTGADDTVLEEMNLPGRWKPKLIGGIGGFVKVRQYDQIPIEICGHQAIGTVLVGPTPANIIGRNLLTQIGCTLNF'" "'{protein}'"
+    assert_success
+    assert_output "seguid=N4/z+gxAPfkFozbb3f3vStDB/5g"
+}
+
+@test "seguid('MTEYKLVVVGAGGVGKSALTIQLTQNHFVDEYDPTIE', '{protein}')" {
+    run api_call "seguid" "'MTEYKLVVVGAGGVGKSALTIQLTQNHFVDEYDPTIE'" "'{protein}'" 
+    assert_success
+    assert_output "seguid=PdwDBhhFjE6qlPmSWCJCOjKIDeA"
+}
+
+@test "seguid('ARDNAKNTLYLQMSRLRSEDTAMYYCAR', '{protein}')" {
+    run api_call "seguid" "'ARDNAKNTLYLQMSRLRSEDTAMYYCAR'" "'{protein}'" 
+    assert_success
+    assert_output "seguid=IdtGC8ZYgDbkA0i4u4n0tiAQwng"
+}
