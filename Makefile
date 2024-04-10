@@ -9,7 +9,7 @@ all: check-cli/ALL
 assert-bats:
 	@git submodule init
 	@git submodule update
-	@cd tests && command -v "${BATS}" > /dev/null || { >&2 echo "ERROR: bats is not installed"; exit 1; }
+	@cd tests-cli && command -v "${BATS}" > /dev/null || { >&2 echo "ERROR: bats is not installed"; exit 1; }
 
 
 # ------------------------------------------------------------
@@ -19,7 +19,7 @@ assert-CLI_CALL:
 	@[[ -n "${CLI_CALL}" ]] || { >&2 echo "ERROR: CLI_CALL is not specified"; exit 1; }
 
 check-cli: assert-CLI_CALL assert-bats
-	cd tests && $(BATS) *.bats
+	cd tests-cli && $(BATS) *.bats
 
 check-cli/seguid-javascript:
 	$(MAKE) check-cli CLI_CALL="npx seguid" 
