@@ -1,6 +1,6 @@
-[![JavaScript CLI checks](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-javascript.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-javascript.yml)
-[![Python CLI checks](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-python.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-python.yml)
-[![R CLI checks](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-r.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-cli-r.yml)
+[![JavaScript checks](https://github.com/seguid/seguid-tests/actions/workflows/check-javascript.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-javascript.yml)
+[![Python checks](https://github.com/seguid/seguid-tests/actions/workflows/check-python.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-python.yml)
+[![R checks](https://github.com/seguid/seguid-tests/actions/workflows/check-r.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-r.yml)
 
 
 # seguid-tests: Test Suite for SEGUID Implementations
