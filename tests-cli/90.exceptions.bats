@@ -152,6 +152,21 @@ run "${cli_call[@]}" --alphabet='A,G ,C,T' <<< 'ACGT'
 assert_failure
 }
 
+@test " --type=lsseguid --alphabet='' <<< 'ACGT' (empty alphabet specification)" {
+run "${cli_call[@]}" --type=lsseguid --alphabet='' <<< 'ACGT'
+assert_failure
+}
+
+@test " --type=lsseguid --alphabet='A,GC,T' <<< 'ACGT' (invalid alphabet specification)" {
+run "${cli_call[@]}" --type=lsseguid --alphabet='A,GC,T' <<< 'ACGT'
+assert_failure
+}
+
+@test " --type=lsseguid --alphabet='ACG' <<< 'ACGT' (invalid alphabet specification)" {
+run "${cli_call[@]}" --type=lsseguid --alphabet='ACG' <<< 'ACGT'
+assert_failure
+}
+
 @test " --type=ldseguid --alphabet='A,G,C,T' <<< 'ACGT;ACGT' (single-stranded alphabet for a double-stranded sequence)" {
 run "${cli_call[@]}" --type=ldseguid --alphabet='A,G,C,T' <<< 'ACGT;ACGT'
 assert_failure
