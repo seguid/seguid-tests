@@ -48,7 +48,7 @@ check-api/seguid-javascript:
 	$(MAKE) check-api SCRIPT_CALL="node" SCRIPT_PREAMBLE="const { seguid, lsseguid, ldseguid, csseguid, cdseguid } = require('seguid')" SCRIPT_PRINT_FMT="console.log(%s)"
 
 check-api/seguid-python:
-	$(MAKE) check-api SCRIPT_CALL="python" SCRIPT_PREAMBLE="from seguid import *" SCRIPT_PRINT_FMT="print(%s)"
+	$(MAKE) check-api SCRIPT_CALL="python" SCRIPT_PREAMBLE="from seguid import *" SCRIPT_PRINT_FMT="out=%s\nif isinstance(out, tuple):\n     out=' '.join(out)\nprint(out)"
 
 check-api/seguid-r:
 	$(MAKE) check-api SCRIPT_CALL="Rscript --no-init-file" SCRIPT_PREAMBLE="library(seguid)" SCRIPT_PRINT_FMT="cat(%s)"
