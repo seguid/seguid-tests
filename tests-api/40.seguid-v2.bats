@@ -217,5 +217,5 @@ setup() {
 @test "seguid('ACGT', '{DNA}', 'both')" {
     run api_call "seguid" "'ACGT'" "'{DNA}'" "'both'"
     assert_success
-    assert_output "IQiZTh seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ"
+    assert_output "('IQiZTh', 'seguid=IQiZThf2zKn/I1KtqStlEdsHYDQ')"
 }
