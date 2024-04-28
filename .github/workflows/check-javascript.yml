@@ -32,6 +32,8 @@ jobs:
           - { node: '19' }
           - { node: '20' }
           - { node: '21' }
+          - { node: '22' }
+          - { node: 'latest' }
           - { node: '20', language: 'C'          }
           - { node: '20', language: 'en_US.utf8' }
           - { node: '20', language: 'et_EE.utf8' }
