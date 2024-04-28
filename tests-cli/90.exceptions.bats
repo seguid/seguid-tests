@@ -142,32 +142,32 @@ assert_failure
 ## --------------------------------------------------------
 ## Invalid alphabet specifications
 ## --------------------------------------------------------
-@test " --alphabet='{dna}' <<< 'ACGT' (unknown alphabet)" {
+@test "<CLI call> --alphabet='{dna}' <<< 'ACGT' (unknown alphabet)" {
 run "${cli_call[@]}" --alphabet='{dna}' <<< 'ACGT'
 assert_failure
 }
 
-@test " --alphabet='A,G ,C,T' <<< 'ACGT' (extra space)" {
+@test "<CLI call> --alphabet='A,G ,C,T' <<< 'ACGT' (extra space)" {
 run "${cli_call[@]}" --alphabet='A,G ,C,T' <<< 'ACGT'
 assert_failure
 }
 
-@test " --alphabet='' <<< 'ACGT' (empty alphabet specification)" {
+@test "<CLI call> --alphabet='' <<< 'ACGT' (empty alphabet specification)" {
 run "${cli_call[@]}" --type=lsseguid --alphabet='' <<< 'ACGT'
 assert_failure
 }
 
-@test " --alphabet='A,GC,T' <<< 'ACGT' (invalid alphabet specification)" {
+@test "<CLI call> --alphabet='A,GC,T' <<< 'ACGT' (invalid alphabet specification)" {
 run "${cli_call[@]}" --type=lsseguid --alphabet='A,GC,T' <<< 'ACGT'
 assert_failure
 }
 
-@test " --alphabet='ACG' <<< 'ACGT' (invalid alphabet specification)" {
+@test "<CLI call> --alphabet='ACG' <<< 'ACGT' (invalid alphabet specification)" {
 run "${cli_call[@]}" --type=lsseguid --alphabet='ACG' <<< 'ACGT'
 assert_failure
 }
 
-@test " --type=ldseguid --alphabet='A,G,C,T' <<< 'ACGT;ACGT' (single-stranded alphabet for a double-stranded sequence)" {
+@test "<CLI call> --type=ldseguid --alphabet='A,G,C,T' <<< 'ACGT;ACGT' (single-stranded alphabet for a double-stranded sequence)" {
 run "${cli_call[@]}" --type=ldseguid --alphabet='A,G,C,T' <<< 'ACGT;ACGT'
 assert_failure
 }

@@ -3,10 +3,12 @@ on:
   
   pull_request:
   
+  workflow_dispatch:
+  
   schedule:
     ## Run every 12 hours
     - cron:  '0 */12 * * *'
-    
+
 name: "Python checks"
 
 permissions:
