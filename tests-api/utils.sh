@@ -9,6 +9,9 @@ setup_api_test() {
 
   script_print_fmt="${SCRIPT_PRINT_FMT:-print(%s)}"
   echo "script_print_fmt: ${script_print_fmt}"
+
+  script_args_sep="${SCRIPT_ARGS_SEP:-, }"
+  echo "script_args_sep: ${script_args_sep}"
 }
 
 
@@ -20,7 +23,7 @@ args_to_string() {
     if [[ -z ${res} ]]; then
       res=${arg}
     else
-      res="${res}, ${arg}"
+      res="${res}${script_args_sep}${arg}"
     fi
   done
   echo "${res}"
