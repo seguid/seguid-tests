@@ -13,6 +13,17 @@ assert-bats:
 
 
 # ------------------------------------------------------------
+# Submodules
+# ------------------------------------------------------------
+add-submodules:
+	git submodule add https://github.com/seguid/seguid-javascript seguid-javascript
+
+seguid-javascript:
+	git submodule init
+	git submodule update
+	cd "$@" && git pull origin main
+
+# ------------------------------------------------------------
 # Check CLI API
 # ------------------------------------------------------------
 assert-CLI_CALL:
@@ -44,8 +55,8 @@ check-api: assert-SCRIPT_CALL assert-bats
 	cd tests-api && $(BATS) *.bats
 
 ## FIXME: How do I use node/npm so it finds the 'seguid' module?
-check-api/seguid-javascript:
-	$(MAKE) check-api SCRIPT_CALL="node" SCRIPT_PREAMBLE="const { seguid, lsseguid, ldseguid, csseguid, cdseguid } = require('seguid')" SCRIPT_PRINT_FMT="console.log(%s)" SCRIPT_ARGS_SEP=", "
+check-api/seguid-javascript: seguid-javascript
+	$(MAKE) check-api NODE_PATH="$(shell pwd)/$<" SCRIPT_CALL="node" SCRIPT_PREAMBLE="const { seguid, lsseguid, ldseguid, csseguid, cdseguid } = require('seguid'); async function print(x) { try { const result = await x; console.log(result); } catch (error) { console.error(error); } }" SCRIPT_PRINT_FMT="print(%s)" SCRIPT_ARGS_SEP=", "
 
 check-api/seguid-python:
 	$(MAKE) check-api SCRIPT_CALL="python" SCRIPT_PREAMBLE="from seguid import *" SCRIPT_PRINT_FMT="out=%s\nif isinstance(out, tuple):\n     out=' '.join(out)\nprint(out)" SCRIPT_ARGS_SEP=", "
@@ -56,4 +67,4 @@ check-api/seguid-r:
 check-api/seguid-tcl:
 	$(MAKE) check-api SCRIPT_CALL="tclsh" SCRIPT_PREAMBLE="source ../src/base64.tcl; source ../src/sha1.tcl; source ../src/seguid.tcl;" SCRIPT_PRINT_FMT="puts stdout [%s]" SCRIPT_ARGS_SEP=" " SCRIPT_CALL_FMT="%s %s"
 
-check-api/ALL: check-api/seguid-python check-api/seguid-r
+check-api/ALL: check-api/seguid-javascript check-api/seguid-python check-api/seguid-r

@@ -71,3 +71,6 @@ jobs:
     - name: Check CLI
       if: runner.os != 'Windows'
       run: make check-cli/seguid-javascript
+      
+    - name: Check API
+      run: make check-api/seguid-python
