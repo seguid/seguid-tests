@@ -54,6 +54,6 @@ check-api/seguid-r:
 	$(MAKE) check-api SCRIPT_CALL="Rscript --no-init-file" SCRIPT_PREAMBLE="library(seguid)" SCRIPT_PRINT_FMT="cat(%s)" SCRIPT_ARGS_SEP=", "
 
 check-api/seguid-tcl:
-	$(MAKE) check-api SCRIPT_CALL="tclsh" SCRIPT_PREAMBLE="source ../src/base64.tcl; source ../src/sha1.tcl; source ../src/seguid.tcl;" SCRIPT_PRINT_FMT="puts stdout [%s]" SCRIPT_ARG_FMT='"%s"' SCRIPT_ARGS_SEP=" " SCRIPT_CALL_FMT="%s %s"
+	$(MAKE) check-api SCRIPT_CALL="tclsh" SCRIPT_PREAMBLE="source ../src/base64.tcl; source ../src/sha1.tcl; source ../src/seguid.tcl;" SCRIPT_PRINT_FMT="puts stdout [%s]" SCRIPT_ARGS_SEP=" " SCRIPT_CALL_FMT="%s %s"
 
 check-api/ALL: check-api/seguid-python check-api/seguid-r

@@ -18,7 +18,7 @@ setup_api_test() {
   fi
   echo "script_args_sep: ${script_args_sep}"
 
-  script_arg_fmt="${SCRIPT_ARG_FMT:-'%s'}"
+  script_arg_fmt="${SCRIPT_ARG_FMT:-\"%s\"}"
   echo "script_arg_fmt: ${script_arg_fmt}"
   [[ -n ${script_arg_fmt} ]] || fail "SCRIPT_ARG_FMT is empty"
   
