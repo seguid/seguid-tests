@@ -15,10 +15,8 @@ assert-bats:
 # ------------------------------------------------------------
 # Submodules
 # ------------------------------------------------------------
-add-submodules:
-	git submodule add https://github.com/seguid/seguid-javascript seguid-javascript
-
-seguid-javascript:
+seguid-%: 
+	git submodule status $@ &> /dev/null || git submodule add https://github.com/seguid/$@ $@
 	git submodule init
 	git submodule update
 	cd "$@" && git pull origin main
@@ -41,7 +39,10 @@ check-cli/seguid-python:
 check-cli/seguid-r:
 	$(MAKE) check-cli CLI_CALL="Rscript --no-init-file -e seguid::seguid --args"
 
-check-cli/ALL: check-cli/seguid-javascript check-cli/seguid-python check-cli/seguid-r
+check-cli/seguid-tcl: seguid-tcl
+	cd "$<"; $(MAKE) check-cli CLI_CALL="tclsh $(CURDIR)/$</seguid"
+
+check-cli/ALL: check-cli/seguid-javascript check-cli/seguid-python check-cli/seguid-r check-cli/seguid-tcl
 
 
 
@@ -64,7 +65,7 @@ check-api/seguid-python:
 check-api/seguid-r:
 	$(MAKE) check-api SCRIPT_CALL="Rscript --no-init-file" SCRIPT_PREAMBLE="library(seguid)" SCRIPT_PRINT_FMT="cat(%s)" SCRIPT_ARGS_SEP=", "
 
-check-api/seguid-tcl:
-	$(MAKE) check-api SCRIPT_CALL="tclsh" SCRIPT_PREAMBLE="source ../src/base64.tcl; source ../src/sha1.tcl; source ../src/seguid.tcl;" SCRIPT_PRINT_FMT="puts stdout [%s]" SCRIPT_ARGS_SEP=" " SCRIPT_CALL_FMT="%s %s"
+check-api/seguid-tcl: seguid-tcl
+	TCL_PATH="$(shell pwd)/$<"; $(MAKE) check-api SCRIPT_CALL="tclsh" SCRIPT_PREAMBLE="source $${TCL_PATH}/src/base64.tcl; source $${TCL_PATH}/src/sha1.tcl; source $${TCL_PATH}/src/seguid.tcl;" SCRIPT_PRINT_FMT="puts stdout [%s]" SCRIPT_ARGS_SEP=" " SCRIPT_CALL_FMT="%s %s"
 
 check-api/ALL: check-api/seguid-javascript check-api/seguid-python check-api/seguid-r

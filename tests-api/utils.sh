@@ -72,6 +72,7 @@ api_call() {
     >&3 echo "--- script ----------------------"
     >&3 cat "${tf}"
     >&3 echo "---------------------------------"
+    >&3 echo "Current working directory: ${PWD}"
   fi
   
   "${script_call[@]}" "${tf}"
