@@ -33,8 +33,8 @@ setup() {
 }
 
 @test "ldseguid('ACGTT', 'AACGT' (strand symmetry)" {
-    truth=$(api_call "ldseguid" "AACGT', 'ACGTT")
-    run api_call "ldseguid" "ACGTT', 'AACGT"
+    truth=$(api_call "ldseguid" "AACGT" "ACGTT")
+    run api_call "ldseguid" "ACGTT" "AACGT"
     assert_success
     assert_output "${truth}"
 }
