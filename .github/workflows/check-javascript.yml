@@ -7,9 +7,7 @@ on:
   
   schedule:
     ## Run every 12 hours
-#    - cron:  '0 */12 * * *'
-    ## Run once a week until https://github.com/seguid/seguid-javascript/issues/17
-    - cron:  '0 0 1 * *'
+    - cron:  '0 */12 * * *'
   
 
 name: "JavaScript checks"
