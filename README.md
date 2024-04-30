@@ -1,6 +1,7 @@
 [![JavaScript checks](https://github.com/seguid/seguid-tests/actions/workflows/check-javascript.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-javascript.yml)
 [![Python checks](https://github.com/seguid/seguid-tests/actions/workflows/check-python.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-python.yml)
 [![R checks](https://github.com/seguid/seguid-tests/actions/workflows/check-r.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-r.yml)
+[![Tcl checks](https://github.com/seguid/seguid-tests/actions/workflows/check-tcl.yml/badge.svg)](https://github.com/seguid/seguid-tests/actions/workflows/check-tcl.yml)
 
 
 # seguid-tests: Test Suite for SEGUID Implementations
@@ -131,4 +132,3 @@ The checks are implemented in Bash and Bats (Bash Automated Testing System):
 * [bats-core]
 
 [bats-core]: https://bats-core.readthedocs.io/en/stable/
-

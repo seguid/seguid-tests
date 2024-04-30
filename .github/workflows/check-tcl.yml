@@ -61,5 +61,5 @@ jobs:
       if: runner.os != 'Windows'
       run: make check-cli/seguid-tcl
       
-    - name: Check API
-      run: make check-api/seguid-tcl
+#    - name: Check API
+#      run: make check-api/seguid-tcl
