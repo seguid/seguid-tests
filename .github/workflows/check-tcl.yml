@@ -20,7 +20,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    name: Node ${{ matrix.config.node }} [${{ matrix.config.language }}]
+    name: Tcl [${{ matrix.config.language }}]
 
     strategy:
       fail-fast: false

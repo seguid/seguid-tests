@@ -40,7 +40,7 @@ check-cli/seguid-r:
 	$(MAKE) check-cli CLI_CALL="Rscript --no-init-file -e seguid::seguid --args"
 
 check-cli/seguid-tcl: seguid-tcl
-	cd "$<"; $(MAKE) check-cli CLI_CALL="tclsh $(CURDIR)/$</seguid"
+	$(MAKE) check-cli CLI_CALL="tclsh $(CURDIR)/$</seguid"
 
 check-cli/ALL: check-cli/seguid-javascript check-cli/seguid-python check-cli/seguid-r check-cli/seguid-tcl
 
