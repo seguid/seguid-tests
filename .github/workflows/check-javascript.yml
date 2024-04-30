@@ -71,4 +71,4 @@ jobs:
       run: make check-cli/seguid-javascript
       
     - name: Check API
-      run: make check-api/seguid-python
+      run: make check-api/seguid-javascript
