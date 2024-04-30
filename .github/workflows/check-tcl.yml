@@ -52,8 +52,7 @@ jobs:
         
     - name: Session information
       run: |
-        tclsh <<< 'puts $tcl_version'
-        tclsh <<< 'puts $tcl_patchLevel'
+        tclsh <<< "puts [info patchlevel]"
         echo "LANGUAGE: ${LANGUAGE:-<not set>}"
         echo "LC_COLLATE: ${LC_COLLATE:-<not set>}"
 
