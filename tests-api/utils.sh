@@ -10,8 +10,14 @@ setup_api_test() {
   script_print_fmt="${SCRIPT_PRINT_FMT:-print(%s)}"
   echo "script_print_fmt: ${script_print_fmt}"
 
-  script_args_sep="${SCRIPT_ARGS_SEP:-, }"
-  echo "script_args_sep: ${script_args_sep}"
+  script_args_sep="${SCRIPT_ARGS_SEP}"
+  if [[ -z ${script_args_sep} ]]; then
+      script_args_sep=" "
+  fi
+  echo "script_args_sep: '${script_args_sep}'"
+
+  script_call_fmt="${SCRIPT_CALL_FMT:-%s(%s)}"
+  echo "script_call_fmt: ${script_call_fmt}"
 }
 
 
@@ -48,7 +54,7 @@ api_call() {
   ## Add script preamble
   printf "%s\n" "${script_preamble[@]}" > "${tf}"
   ## Generate API call
-  call="${fcn}($(args_to_string "${args[@]}"))"
+  call=$(printf "${script_call_fmt}" "${fcn}" "$(args_to_string "${args[@]}")")
   ## Wrap API call in print statement
   call=$(printf "${script_print_fmt}" "${call}")
   printf "%s\n" "${call}" >> "${tf}"
