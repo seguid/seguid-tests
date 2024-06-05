@@ -2,7 +2,8 @@ SHELL=bash
 BATS_SUPPORT_VERSION=0.3.0
 BATS_ASSERT_VERSION=2.1.0
 BATS = bats/bin/bats
-
+JOBS ?= $(BATS_JOBS)
+JOBS ?= 1
 
 all: check-cli/ALL
 
@@ -57,8 +58,7 @@ assert-SCRIPT_CALL:
 	@[[ -n "${SCRIPT_CALL}" ]] || { >&2 echo "ERROR: SCRIPT_CALL is not specified"; exit 1; }
 
 check-api: assert-SCRIPT_CALL assert-bats
-	cd tests-api && $(BATS) *.bats
-
+	cd tests-api && $(BATS) --jobs $(JOBS) *.bats
 ## FIXME: How do I use node/npm so it finds the 'seguid' module?
 check-api/seguid-javascript: update-submodules
 	$(MAKE) check-api NODE_PATH="$(shell pwd)/$(@F)" SCRIPT_CALL="node" SCRIPT_PREAMBLE="const { seguid, lsseguid, ldseguid, csseguid, cdseguid } = require('seguid'); async function print(x) { try { const result = await x; console.log(result); } catch (error) { console.error(error); } }" SCRIPT_PRINT_FMT="print(%s)" SCRIPT_ARGS_SEP=", "
