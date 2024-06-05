@@ -122,7 +122,11 @@ or short:
 $ make check-api/seguid-r
 ```
 
+## Parallel option
 
+Pass a `BATS_JOBS` environment variable, eg `BATS_JOBS=16 make`
+
+You need [GNU parallel](https://www.gnu.org/software/parallel/)
 
 ## Requirements
 
