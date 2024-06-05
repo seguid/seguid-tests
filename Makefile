@@ -33,7 +33,7 @@ assert-CLI_CALL:
 	@[[ -n "${CLI_CALL}" ]] || { >&2 echo "ERROR: CLI_CALL is not specified"; exit 1; }
 
 check-cli: assert-CLI_CALL assert-bats
-	cd tests-api && $(BATS) --jobs $(JOBS) *.bats
+	cd tests-cli && $(BATS) --jobs $(JOBS) *.bats
 
 check-cli/seguid-javascript: update-submodules
 	$(MAKE) check-cli CLI_CALL="npx seguid" 
