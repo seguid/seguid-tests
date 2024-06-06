@@ -2,8 +2,11 @@ SHELL=bash
 BATS_SUPPORT_VERSION=0.3.0
 BATS_ASSERT_VERSION=2.1.0
 BATS = bats/bin/bats
-JOBS ?= $(BATS_JOBS)
-JOBS ?= 1
+ifdef BATS_JOBS
+JOBS = $(BATS_JOBS)
+else
+JOBS = 1
+endif
 
 all: check-cli/ALL
 
