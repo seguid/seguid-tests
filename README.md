@@ -124,13 +124,14 @@ $ make check-api/seguid-r
 
 ## Parallel option
 
-Pass a `BATS_JOBS` environment variable, eg `BATS_JOBS=16 make`
-
-You need [GNU parallel](https://www.gnu.org/software/parallel/)
+Pass a `BATS_JOBS` environment variable, e.g. `BATS_JOBS=16 make`.
+You need [GNU parallel](https://www.gnu.org/software/parallel/) for
+this to work.
 
 ## Requirements
 
-The checks are implemented in Bash and Bats (Bash Automated Testing System):
+The checks are implemented in Bash and Bats (Bash Automated Testing
+System):
 
 * Bash
 * [bats-core]
