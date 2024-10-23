@@ -10,3 +10,6 @@
 [submodule "seguid-tcl"]
 	path = seguid-tcl
 	url = https://github.com/seguid/seguid-tcl
+[submodule "seguid-javascript"]
+	path = seguid-javascript
+	url = https://github.com/seguid/seguid-javascript
